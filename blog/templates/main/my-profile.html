@@ -1,0 +1,1508 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block title%}{{user_profile.user}} Profile{% endblock title %}
+
+
+{% block content %}
+
+<body>
+
+
+    {% if profile.user == user %}
+    <!-- <div class="container profile p-5 mt-5" style="background-color: #d9dde2; border-radius: 20px;">
+
+        <a href="/search-page" style="text-decoration: none;">
+            <div class="input-group rounded mb-5">
+                <input type="search" name="username" class="form-control rounded" placeholder="Search User"
+                    aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit"
+                    style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                    <span class="input-group-text border-0" id="search-addon"
+                        style="color: #ff6600; background-color: white">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </button>
+            </div>
+        </a>
+
+
+        <div class="row">
+
+            <div class="col-12" style="margin-bottom: 30px; ">
+                <div class="text-center" style="width: 100%; height: 350px;">
+                    {% if user_profile.image %}
+                    <img src="{{user_profile.image.url}}" class="rounded-circle" style="width: 168px; height: 168px;">
+                    {% else %}
+                    <img src="{% static 'images/default-profile-image.jpg' %}">
+                    {% endif %}
+
+
+                    {% if user_profile.instructor == True %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}} <span
+                            style="font-size: 27px;">(Teacher)</span> </h1>
+                    {% endif %}
+                    {% if user_profile.instructor == False %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}}</h1>
+                    {% endif %}
+
+
+
+                    <h3 class="text-black mb-2" style="font-size: 23px;">{{user_profile.bio}}</h3>
+
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3">
+                                {% if user_object.username == user.username %}
+                                {% if user_profile.instructor == True %}
+                                <a href="/settings-teacher" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                    Profile</a>
+                                {% else %}
+                                <a href="/settings" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                    Profile</a>
+                                {% endif %}
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                {% if user_object.username == user.username %}
+                                <a href="/logout" class="btn btn-danger w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-2x fa-right-from-bracket mr-3"></i></span>Logout</a>
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                {% if user_object.username == user.username %}
+
+                                {% if user_profile.instructor == True %}
+                                <a href=""></a>
+                                {% else %}
+                                <a href="/wallet/recharge" class="btn btn-success w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge Wallet</a>
+                                {% endif %}
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+            <div class="col-12 mt-5">
+
+                {% if user_object.username == user.username %}
+                {% if user_profile.instructor == True %}
+                <p><i class="fa-solid fa-book text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black; text-transform: capitalize;">{{user_profile.subject}}
+                        Teacher</span></p>
+                {% endif %}
+
+                {% else %}
+                {% if user_profile.instructor == True %}
+                <p><i class="fa-solid fa-book text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black; text-transform: capitalize;">{{user_profile.subject}}
+                        Teacher</span></p>
+                {% endif %}
+                {% endif %}
+
+
+
+
+                {% if user_profile.name %}
+                <p><i class="fa-solid fa-user-circle text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Full Name: </span><span
+                        style="font-size: 18px;">{{user_profile.name}}</span></p>
+                {% endif %}
+
+                {% if user_object.username == user.username %}
+                {% if user.email %}
+                <p><i class="fa-solid fa-envelope text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Email Address: </span><span
+                        style="font-size: 18px;">{{user.email}}</span></p>
+                {% endif %}
+                {% else %}
+                <a href=""></a>
+                {% endif %}
+
+
+
+
+
+                {% if user_profile.phone %}
+                <p><i class="fa-solid fa-phone text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Phone Number: </span><span
+                        style="font-size: 18px;">{{user_profile.phone}}</span></p>
+                {% endif %}
+
+
+                {% if user_profile.location %}
+                <p><i class="fa-solid fa-location-dot text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Lives In: </span><span
+                        style="font-size: 18px;"> {{user_profile.location}}</span></p>
+                {% endif %}
+
+                {% if user_profile.year == 'none' %}
+                <p></p>
+                {% else %}
+
+                <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">School Year: </span><span
+                        style="font-size: 18px;"><span style="text-transform: capitalize;">{{user_profile.year}}
+                            Secondary</span></span></p>
+                {% endif %}
+
+
+                {% if user_profile.instructor == True %}
+                <p></p>
+                {% endif %}
+
+                {% if user_profile.instructor == False %}
+                <p><i class="fa-solid fa-book text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Lessons Bought: </span><span
+                        style="font-size: 18px;"><span style="text-transform: capitalize;">{{user_profile.no_of_buys}}
+                        </span></span></p>
+                {% endif %}
+
+
+
+
+
+
+
+                {% if user_profile.instructor == True %}
+                <p></p>
+                {% endif %}
+
+                {% if user_profile.instructor == False %}
+                {% if user_following %}
+                <p><i class="fa-solid fa-user text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Related Teacher: </span><span
+                        style="font-size: 18px;"><span
+                            style="text-transform: capitalize;">{{user_following}}</span></span></p>
+                {% endif %}
+                {% endif %}
+
+
+                {% if user_profile.instructor == True %}
+                <a href=""></a>
+                {% else %}
+                <p><i class="fa-solid fa-calendar text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Joined In: </span><span
+                        style="font-size: 18px;"><span
+                            style="text-transform: capitalize;">{{user_profile.join_date|date:"SHORT_DATE_FORMAT"}}</span></span>
+                </p>
+                {% endif %}
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+    </div> -->
+
+    <div class="container-fluid " style="background-color: #f1f1f1;">
+        <div class="container ">
+
+            <div class="search-box" style="padding-top: 50px;">
+                <a href="/search-page" style="text-decoration: none;">
+                    <div class="input-group rounded mb-5">
+                        <input type="search" name="username" class="form-control rounded" placeholder="Search User"
+                            aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit"
+                            style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                            <span class="input-group-text border-0" id="search-addon"
+                                style="color: #ff6600; background-color: white">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="row pb-3 pt-3" style="display: flex; flex-direction: row; justify-content: space-between; ">
+
+
+                <div class="col-12 col-lg-6 mb-4" style="  text-align: center; ">
+                    <div class="box "
+                        style="border-radius: 20px;  padding: 10px; display: flex; flex-direction: column; justify-content: center  ;  background-color: white ; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1);">
+
+                        <div class="profile-image" style="align-content: center;">
+                            {% if profile.image %}
+                            <img src="{{profile.image.url}}" class="rounded-circle mt-3 mb-2"
+                                style="width: 168px; height: 168px;">
+                            {% else %}
+                            <img src="{% static 'images/default-profile-image.jpg' %}" class="rounded-circle mt-3 mb-2"
+                                style="width: 168px; height: 168px;">
+
+                            {% endif %}
+
+                            {% if profile.instructor == True %}
+                            <h3 style="color: black; font-size: 30px; font-weight: 600; margin-top: 10px;">
+                                {{profile.name}} <i class="fa-solid fa-circle-check"></i></h3>
+                            {% endif %}
+                            {% if profile.instructor == False %}
+                            <h3 style="color: black; font-size: 30px; font-weight: 600; margin-top: 10px;">
+                                {{profile.name}}</h3>
+                            {% endif %}
+
+
+                            <h3 class="text-black" style=" font-size: 20px; font-weight: 400; margin-top: 0px;">
+                                @{{profile.user}}</h3>
+
+
+
+
+                            {% if profile.instructor == False %}
+                            {% if profile.year == 'none' %}
+                            <p></p>
+                            {% else %}
+                            <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                                    style="margin-left: 10px; font-size: 18px; color: black;">School Year: </span><span
+                                    style="font-size: 18px;"><span style="text-transform: capitalize;">{{profile.year}}
+                                        Secondary</span></span></p>
+                            {% endif %}
+                            {% endif %}
+
+
+
+
+
+
+
+
+                            {% if profile.user == user %}
+                            <a href="/logout" class="btn btn-danger w-100 mt-2" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-right-from-bracket mr-3"></i></span>Logout</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+                            {% if profile.user == user %}
+                            <a href="/wallet/recharge" class="btn btn-success w-100 mt-2" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge
+                                Wallet</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <div class="box "
+                        style=" border-radius: 20px;  padding: 10px; display: flex; flex-direction: column;  background-color: white ; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1);">
+
+                        <div class="profile-details">
+
+
+                            <div style="text-align: start; padding: 10px;">
+
+
+
+
+                                {% if profile.user == user %}
+                                {% if user.email %}
+                                <p><i class="fa-solid fa-envelope text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Email Address:
+                                    </span><span style="font-size: 18px;">{{user.email}}</span></p>
+                                {% endif %}
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+
+
+
+
+
+                                {% if profile.phone %}
+                                <p><i class="fa-solid fa-phone text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Phone Number:
+                                    </span><span style="font-size: 18px;">{{profile.phone}}</span></p>
+                                {% endif %}
+
+                                {% if profile.school %}
+                                <p><i class="fa-solid fa-school text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">School: </span><span
+                                        style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.school}}
+                                        </span></span></p>
+                                {% endif %}
+
+
+                                {% if profile.location %}
+                                <p><i class="fa-solid fa-location-dot text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Lives In: </span><span
+                                        style="font-size: 18px;"> {{profile.location}}</span></p>
+                                {% endif %}
+
+
+
+
+                                {% if profile.instructor == False %}
+                                {% if profile.year == 'none' %}
+                                <p></p>
+                                {% else %}
+                                <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">School Year:
+                                    </span><span style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.year}}
+                                            Secondary</span></span></p>
+                                {% endif %}
+                                {% endif %}
+
+
+
+                                {% if profile.instructor == False %}
+                                <p><i class="fa-solid fa-book text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Lessons Bought:
+                                    </span><span style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.no_of_buys}}
+                                        </span></span></p>
+                                {% endif %}
+
+
+                                {% if profile.instructor == False %}
+
+                                <p><i class="fa-solid fa-calendar text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Joined In:
+                                    </span><span style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.join_date|date:"SHORT_DATE_FORMAT"}}</span></span>
+                                </p>
+                                {% endif %}
+
+
+
+                            </div>
+
+
+
+
+                            {% if profile.user == user %}
+
+                            {% if profile.instructor == True %}
+                            <a href="/settings-teacher" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                Profile</a>
+                            {% endif %}
+
+                            {% if profile.instructor == False %}
+                            <a href="/settings" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                Profile</a>
+                            {% endif %}
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+        {% if profile.user == user %}
+        {% if profile.instructor == False %}
+        <div class="container mt-2  ">
+            <div class="row pb-3 pt-3">
+
+
+                <div class="col-12 "
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box "
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Wallet
+                                Credit:
+                                {{profile.money}} EGP</h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/wallet/recharge" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-12 mt-4"
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box"
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Inbox </h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/inbox" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-envelope mr-3"></i></span>
+                                Inbox</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 mt-4 "
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box"
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Account
+                                Activities </h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/wallet/statement" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-eye mr-3"></i></span>
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-4 mb-5"
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box"
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Account
+                                Payments </h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/wallet/payments" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-eye mr-3"></i></span>
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+
+    </div>
+    {% else %}
+
+
+    {% if profile.public == True %}
+
+    <div class="container-fluid " style="background-color: #f1f1f1;">
+        <div class="container ">
+
+            <div class="search-box" style="padding-top: 50px;">
+                <a href="/search-page" style="text-decoration: none;">
+                    <div class="input-group rounded mb-5">
+                        <input type="search" name="username" class="form-control rounded" placeholder="Search User"
+                            aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit"
+                            style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                            <span class="input-group-text border-0" id="search-addon"
+                                style="color: #ff6600; background-color: white">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="row pb-3 pt-3" style="display: flex; flex-direction: row; justify-content: space-between; ">
+
+
+                <div class="col-12 col-lg-6 mb-4" style="  text-align: center; ">
+                    <div class="box "
+                        style="border-radius: 20px;  padding: 10px; display: flex; flex-direction: column; justify-content: center  ;  background-color: white ; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1);">
+
+                        <div class="profile-image" style="align-content: center;">
+                            {% if profile.image %}
+                            <img src="{{profile.image.url}}" class="rounded-circle mt-3 mb-2"
+                                style="width: 168px; height: 168px;">
+                            {% else %}
+                            <img src="{% static 'images/default-profile-image.jpg' %}" class="rounded-circle mt-3 mb-2"
+                                style="width: 168px; height: 168px;">
+                            {% endif %}
+
+                            {% if profile.instructor == True %}
+                            <h3 style="color: black; font-size: 30px; font-weight: 600; margin-top: 10px;">
+                                {{profile.name}} <i class="fa-solid fa-circle-check"></i></h3>
+                            {% endif %}
+                            {% if profile.instructor == False %}
+                            <h3 style="color: black; font-size: 30px; font-weight: 600; margin-top: 10px;">
+                                {{profile.name}}</h3>
+                            {% endif %}
+
+
+                            <h3 class="text-black" style=" font-size: 20px; font-weight: 400; margin-top: 0px;">
+                                @{{profile.user}}</h3>
+
+
+
+
+                            {% if profile.instructor == False %}
+                            {% if profile.year == 'none' %}
+                            <p></p>
+                            {% else %}
+                            <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                                    style="margin-left: 10px; font-size: 18px; color: black;">School Year: </span><span
+                                    style="font-size: 18px;"><span style="text-transform: capitalize;">{{profile.year}}
+                                        Secondary</span></span></p>
+                            {% endif %}
+                            {% endif %}
+
+
+
+
+
+
+
+
+                            {% if profile.user == user %}
+                            <a href="/logout" class="btn btn-danger w-100 mt-2" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-right-from-bracket mr-3"></i></span>Logout</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+                            {% if profile.user == user %}
+                            <a href="/wallet/recharge" class="btn btn-success w-100 mt-2" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge
+                                Wallet</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <div class="box "
+                        style=" border-radius: 20px;  padding: 10px; display: flex; flex-direction: column;  background-color: white ; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1);">
+
+                        <div class="profile-details">
+
+
+                            <div style="text-align: start; padding: 10px;">
+
+
+
+
+                                {% if profile.user == user %}
+                                {% if user.email %}
+                                <p><i class="fa-solid fa-envelope text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Email Address:
+                                    </span><span style="font-size: 18px;">{{user.email}}</span></p>
+                                {% endif %}
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+
+
+
+
+
+                                {% if profile.phone %}
+                                <p><i class="fa-solid fa-phone text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Phone Number:
+                                    </span><span style="font-size: 18px;">{{profile.phone}}</span></p>
+                                {% endif %}
+
+                                {% if profile.school %}
+                                <p><i class="fa-solid fa-school text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">School: </span><span
+                                        style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.school}}
+                                        </span></span></p>
+                                {% endif %}
+
+
+                                {% if profile.location %}
+                                <p><i class="fa-solid fa-location-dot text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Lives In: </span><span
+                                        style="font-size: 18px;"> {{profile.location}}</span></p>
+                                {% endif %}
+
+
+
+
+                                {% if profile.instructor == False %}
+                                {% if profile.year == 'none' %}
+                                <p></p>
+                                {% else %}
+                                <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">School Year:
+                                    </span><span style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.year}}
+                                            Secondary</span></span></p>
+                                {% endif %}
+                                {% endif %}
+
+
+
+                                {% if profile.instructor == False %}
+                                <p><i class="fa-solid fa-book text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Lessons Bought:
+                                    </span><span style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.no_of_buys}}
+                                        </span></span></p>
+                                {% endif %}
+
+
+                                {% if profile.instructor == False %}
+
+                                <p><i class="fa-solid fa-calendar text-primary" style="font-size: 20px;"></i><span
+                                        style="margin-left: 10px; font-size: 18px; color: black;">Joined In:
+                                    </span><span style="font-size: 18px;"><span
+                                            style="text-transform: capitalize;">{{profile.join_date|date:"SHORT_DATE_FORMAT"}}</span></span>
+                                </p>
+                                {% endif %}
+
+
+
+                            </div>
+
+
+
+
+                            {% if profile.user == user %}
+
+                            {% if profile.instructor == True %}
+                            <a href="/settings-teacher" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                Profile</a>
+                            {% endif %}
+
+                            {% if profile.instructor == False %}
+                            <a href="/settings" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                Profile</a>
+                            {% endif %}
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+        {% if profile.user == user %}
+        {% if profile.instructor == False %}
+        <div class="container mt-2  ">
+            <div class="row pb-3 pt-3">
+
+
+                <div class="col-12 "
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box "
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Wallet
+                                Credit:
+                                {{profile.money}} EGP</h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/wallet/recharge" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-12 mt-4"
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box"
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Inbox </h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/inbox" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-envelope mr-3"></i></span>
+                                Inbox</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 mt-4 "
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box"
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Account
+                                Activities </h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/wallet/statement" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-eye mr-3"></i></span>
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-4 mb-5"
+                    style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                    <div class="box"
+                        style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div class="left " style="align-content: center;">
+                            <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Account
+                                Payments </h3>
+                        </div>
+
+                        <div class="right">
+                            <a href="/wallet/payments" class="btn btn-primary w-100" data-ripple="">
+                                <span style="font-size: 10px;"><i class="fa fa-2x fa-eye mr-3"></i></span>
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+
+
+
+
+    <!-- <div class="container profile p-5" style="background-color: #d9dde2; border-radius: 20px;">
+
+        <a href="/search-page" style="text-decoration: none;">
+            <div class="input-group rounded mb-5">
+                <input type="search" name="username" class="form-control rounded" placeholder="Search User"
+                    aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit"
+                    style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                    <span class="input-group-text border-0" id="search-addon"
+                        style="color: #ff6600; background-color: white">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </button>
+            </div>
+        </a>
+
+
+        <div class="row">
+
+            <div class="col-12" style="margin-bottom: 30px;">
+                <div class="text-center" style="width: 100%; height: 350px;">
+                    {% if user_profile.image %}
+                    <img src="{{user_profile.image.url}}" class="rounded-circle" style="width: 168px; height: 168px;">
+                    {% else %}
+                    <img src="{% static 'img/default-profile-image.jpg' %}">
+                    {% endif %}
+
+
+                    {% if user_profile.instructor == True %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}} <span
+                            style="font-size: 27px;">(Teacher)</span> </h1>
+                    {% endif %}
+                    {% if user_profile.instructor == False %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}}</h1>
+                    {% endif %}
+
+
+
+                    <h3 class="text-black mb-2" style="font-size: 23px;">{{user_profile.bio}}</h3>
+
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3">
+                                {% if user_object.username == user.username %}
+                                <a href="/settings" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                    Profile</a>
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                {% if user_object.username == user.username %}
+                                <a href="/logout" class="btn btn-danger w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-2x fa-right-from-bracket mr-3"></i></span>Logout</a>
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                {% if user_object.username == user.username %}
+                                <a href="/wallet/recharge" class="btn btn-success w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge Wallet</a>
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+            <div class="col-12 mt-5">
+                {% if user_profile.name %}
+                <p><i class="fa-solid fa-user-circle text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Full Name: </span><span
+                        style="font-size: 18px;">{{user_profile.name}}</span></p>
+                {% endif %}
+
+                {% if user_object.username == user.username %}
+                {% if user.email %}
+                <p><i class="fa-solid fa-envelope text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Email Address: </span><span
+                        style="font-size: 18px;">{{user.email}}</span></p>
+                {% endif %}
+                {% else %}
+                <a href=""></a>
+                {% endif %}
+
+
+
+
+
+                {% if user_profile.phone %}
+                <p><i class="fa-solid fa-phone text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Phone Number: </span><span
+                        style="font-size: 18px;">{{user_profile.phone}}</span></p>
+                {% endif %}
+
+                {% if user_profile.location %}
+                <p><i class="fa-solid fa-location-dot text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Lives In: </span><span
+                        style="font-size: 18px;"> {{user_profile.location}}</span></p>
+                {% endif %}
+
+                {% if user_profile.year == 'none' %}
+                <p></p>
+                {% else %}
+
+                <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">School Year: </span><span
+                        style="font-size: 18px;"><span style="text-transform: capitalize;">{{user_profile.year}}
+                            Secondary</span></span></p>
+                {% endif %}
+
+
+                {% if user_profile.instructor == True %}
+                <p></p>
+                {% endif %}
+
+                {% if user_profile.instructor == False %}
+                <p><i class="fa-solid fa-book text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Lessons Bought: </span><span
+                        style="font-size: 18px;"><span style="text-transform: capitalize;">{{user_profile.no_of_buys}}
+                        </span></span></p>
+                {% endif %}
+
+
+
+
+
+
+
+                {% if user_profile.instructor == True %}
+                <p></p>
+                {% endif %}
+
+                {% if user_profile.instructor == False %}
+                {% if user_following %}
+                <p><i class="fa-solid fa-user text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Related Teacher: </span><span
+                        style="font-size: 18px;"><span
+                            style="text-transform: capitalize;">{{user_following}}</span></span></p>
+                {% endif %}
+                {% endif %}
+
+
+                {% if user_profile.join_date %}
+                <p><i class="fa-solid fa-calendar text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Joined In: </span><span
+                        style="font-size: 18px;"><span
+                            style="text-transform: capitalize;">{{user_profile.join_date|date:"SHORT_DATE_FORMAT"}}</span></span>
+                </p>
+                {% endif %}
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div> -->
+    {% endif %}
+
+    {% if profile.public == False %}
+
+    <div class="container-fluid " style="background-color: #f1f1f1;">
+        <div class="container ">
+
+            <div class="search-box" style="padding-top: 50px;">
+                <a href="/search-page" style="text-decoration: none;">
+                    <div class="input-group rounded mb-5">
+                        <input type="search" name="username" class="form-control rounded" placeholder="Search User"
+                            aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit"
+                            style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                            <span class="input-group-text border-0" id="search-addon"
+                                style="color: #ff6600; background-color: white">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="row pb-3 pt-3" style="display: flex; flex-direction: row; justify-content: space-between; ">
+
+
+                <div class="col-12 col-lg-6 mb-4" style="  text-align: center; ">
+                    <div class="box "
+                        style="border-radius: 20px;  padding: 10px; display: flex; flex-direction: column; justify-content: center  ;  background-color: white ; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1);">
+
+                        <div class="profile-image" style="align-content: center;">
+                            {% if profile.image %}
+                            <img src="{{profile.image.url}}" class="rounded-circle mt-3 mb-2"
+                                style="width: 168px; height: 168px;">
+                            {% else %}
+                            <img src="{% static 'images/default-profile-image.jpg' %}" class="rounded-circle mt-3 mb-2"
+                                style="width: 168px; height: 168px;">
+                            {% endif %}
+
+                            {% if profile.instructor == True %}
+                            <h3 style="color: black; font-size: 30px; font-weight: 600; margin-top: 10px;">
+                                {{profile.name}} <i class="fa-solid fa-circle-check"></i></h3>
+                            {% endif %}
+                            {% if profile.instructor == False %}
+                            <h3 style="color: black; font-size: 30px; font-weight: 600; margin-top: 10px;">
+                                {{profile.name}}</h3>
+                            {% endif %}
+
+
+                            <h3 class="text-black" style=" font-size: 20px; font-weight: 400; margin-top: 0px;">
+                                @{{profile.user}}</h3>
+
+
+
+
+                            {% if profile.instructor == False %}
+                            {% if profile.year == 'none' %}
+                            <p></p>
+                            {% else %}
+                            <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                                    style="margin-left: 10px; font-size: 18px; color: black;">School Year: </span><span
+                                    style="font-size: 18px;"><span style="text-transform: capitalize;">{{profile.year}}
+                                        Secondary</span></span></p>
+                            {% endif %}
+                            {% endif %}
+
+
+
+
+
+
+
+
+                            {% if profile.user == user.username %}
+                            <a href="/logout" class="btn btn-danger w-100 mt-2" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-right-from-bracket mr-3"></i></span>Logout</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+                            {% if profile.user == user.username %}
+                            <a href="/wallet/recharge" class="btn btn-success w-100 mt-2" data-ripple="">
+                                <span style="font-size: 10px;"><i
+                                        class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge
+                                Wallet</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <div class="box "
+                        style=" border-radius: 20px;  padding: 10px; display: flex; flex-direction: column;  background-color: white ; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1);">
+
+                        <div class="profile-details">
+
+
+                            <div style="text-align: center;">
+
+
+
+
+                                <h2 class="text-black mt-5 mb-5" style="font-size: 23px; color: red;"><span
+                                        style="font-size: 10px;"><i class="fa fa-2x fa-lock mr-3"></i></span> User Has
+                                    Locked His
+                                    Profile</h2>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+            {% if profile.user == user %}
+            {% if profile.instructor == False %}
+            <div class="container mt-2  ">
+                <div class="row pb-3 pt-3">
+    
+    
+                    <div class="col-12 "
+                        style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                        <div class="box "
+                            style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+    
+                            <div class="left " style="align-content: center;">
+                                <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Wallet
+                                    Credit:
+                                    {{profile.money}} EGP</h3>
+                            </div>
+    
+                            <div class="right">
+                                <a href="/wallet/recharge" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    
+                    <div class="col-12 mt-4"
+                        style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                        <div class="box"
+                            style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+    
+                            <div class="left " style="align-content: center;">
+                                <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Inbox </h3>
+                            </div>
+    
+                            <div class="right">
+                                <a href="/inbox" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i class="fa fa-2x fa-envelope mr-3"></i></span>
+                                    Inbox</a>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="col-12 mt-4 "
+                        style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                        <div class="box"
+                            style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+    
+                            <div class="left " style="align-content: center;">
+                                <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Account
+                                    Activities </h3>
+                            </div>
+    
+                            <div class="right">
+                                <a href="/wallet/statement" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i class="fa fa-2x fa-eye mr-3"></i></span>
+                                    View</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-12 mt-4 mb-5"
+                        style="background-color: white; box-shadow: 0px 0px 28px -12px rgba(0, 0, 0, 1); border-radius: 20px; text-align: center;">
+                        <div class="box"
+                            style=" padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+    
+                            <div class="left " style="align-content: center;">
+                                <h3 style="color: black; font-size: 17px; font-weight: 600; margin-top: 10px;">Account
+                                    Payments </h3>
+                            </div>
+    
+                            <div class="right">
+                                <a href="/wallet/payments" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i class="fa fa-2x fa-eye mr-3"></i></span>
+                                    View</a>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+        </div>
+
+
+
+
+        <!-- <div class="container profile p-5" style="background-color: #d9dde2; border-radius: 20px;">
+
+        <a href="/search-page" style="text-decoration: none;">
+            <div class="input-group rounded mb-5">
+                <input type="search" name="username" class="form-control rounded" placeholder="Search User"
+                    aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit"
+                    style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                    <span class="input-group-text border-0" id="search-addon"
+                        style="color: #ff6600; background-color: white">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </button>
+            </div>
+        </a>
+
+
+        <div class="row">
+
+            <div class="col-12" style="margin-bottom: 30px;">
+                <div class="text-center" style="width: 100%; height: 350px;">
+                    {% if user_profile.image %}
+                    <img src="{{user_profile.image.url}}" class="rounded-circle" style="width: 168px; height: 168px;">
+                    {% else %}
+                    <img src="{% static 'img/default-profile-image.jpg' %}">
+                    {% endif %}
+
+
+                    {% if user_profile.instructor == True %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}} <span
+                            style="font-size: 27px;">(Teacher)</span> </h1>
+                    {% endif %}
+                    {% if user_profile.instructor == False %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}}</h1>
+                    {% endif %}
+
+
+
+                    <h3 class="text-black mb-2" style="font-size: 23px;">{{user_profile.bio}}</h3>
+
+
+
+                    <h2 class="text-black mb-2 mt-5" style="font-size: 23px; color: red;"><span
+                            style="font-size: 10px;"><i class="fa fa-2x fa-lock mr-3"></i></span> User Has Locked His
+                        Profile</h2>
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+    </div> -->
+        {% endif %}
+
+
+
+        {% endif %}
+
+
+        <!-- <div class="container profile p-5" style="background-color: #d9dde2; border-radius: 20px;">
+
+        <a href="/search-page" style="text-decoration: none;">
+            <div class="input-group rounded mb-5">
+                <input type="search" name="username" class="form-control rounded" placeholder="Search User"
+                    aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit"
+                    style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                    <span class="input-group-text border-0" id="search-addon"
+                        style="color: #ff6600; background-color: white">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </button>
+            </div>
+        </a>
+
+
+        <div class="row">
+
+            <div class="col-12" style="margin-bottom: 30px;">
+                <div class="text-center" style="width: 100%; height: 350px;">
+                    {% if user_profile.image %}
+                    <img src="{{user_profile.image.url}}" class="rounded-circle" style="width: 168px; height: 168px;">
+                    {% else %}
+                    <img src="{% static 'img/default-profile-image.jpg' %}">
+                    {% endif %}
+
+
+                    {% if user_profile.instructor == True %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}} <span
+                            style="font-size: 27px;">(Teacher)</span> </h1>
+                    {% endif %}
+                    {% if user_profile.instructor == False %}
+                    <h1 class="mt-2" style="color: black; text-transform: capitalize;">{{user_profile.user}}</h1>
+                    {% endif %}
+
+
+
+                    <h3 class="text-black mb-2" style="font-size: 23px;">{{user_profile.bio}}</h3>
+
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3">
+                                {% if user_object.username == user.username %}
+                                <a href="/settings" class="btn btn-primary w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i class="fa fa-2x fa-pen mr-3"></i></span>Edit
+                                    Profile</a>
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                {% if user_object.username == user.username %}
+                                <a href="/logout" class="btn btn-danger w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-2x fa-right-from-bracket mr-3"></i></span>Logout</a>
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                {% if user_object.username == user.username %}
+                                <a href="/wallet/recharge" class="btn btn-success w-100" data-ripple="">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-2x fa-money-bill mr-3"></i></span>Recharge Wallet</a>
+                                {% else %}
+                                <a href=""></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+            <div class="col-12 mt-5">
+                {% if user_profile.name %}
+                <p><i class="fa-solid fa-user-circle text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Full Name: </span><span
+                        style="font-size: 18px;">{{user_profile.name}}</span></p>
+                {% endif %}
+
+                {% if user_object.username == user.username %}
+                {% if user.email %}
+                <p><i class="fa-solid fa-envelope text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Email Address: </span><span
+                        style="font-size: 18px;">{{user.email}}</span></p>
+                {% endif %}
+                {% else %}
+                <a href=""></a>
+                {% endif %}
+
+
+
+
+
+                {% if user_profile.phone %}
+                <p><i class="fa-solid fa-phone text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Phone Number: </span><span
+                        style="font-size: 18px;">{{user_profile.phone}}</span></p>
+                {% endif %}
+
+                {% if user_profile.location %}
+                <p><i class="fa-solid fa-location-dot text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Lives In: </span><span
+                        style="font-size: 18px;"> {{user_profile.location}}</span></p>
+                {% endif %}
+
+                {% if user_profile.year %}
+                <p><i class="fa-solid fa-graduation-cap text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">School Year: </span><span
+                        style="font-size: 18px;"><span style="text-transform: capitalize;">{{user_profile.year}}
+                            Secondary</span></span></p>
+                {% endif %}
+
+
+                {% if user_profile.instructor == True %}
+                <p></p>
+                {% endif %}
+
+                {% if user_profile.instructor == False %}
+                <p><i class="fa-solid fa-book text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Lessons Bought: </span><span
+                        style="font-size: 18px;"><span style="text-transform: capitalize;">{{user_profile.no_of_buys}}
+                        </span></span></p>
+                {% endif %}
+
+
+
+
+
+
+
+                {% if user_profile.instructor == True %}
+                <p></p>
+                {% endif %}
+
+                {% if user_profile.instructor == False %}
+                {% if user_following %}
+                <p><i class="fa-solid fa-user text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Related Teacher: </span><span
+                        style="font-size: 18px;"><span
+                            style="text-transform: capitalize;">{{user_following}}</span></span></p>
+                {% endif %}
+                {% endif %}
+
+
+                {% if user_profile.join_date %}
+                <p><i class="fa-solid fa-calendar text-primary" style="font-size: 20px;"></i><span
+                        style="margin-left: 10px; font-size: 18px; color: black;">Joined In: </span><span
+                        style="font-size: 18px;"><span
+                            style="text-transform: capitalize;">{{user_profile.join_date|date:"SHORT_DATE_FORMAT"}}</span></span>
+                </p>
+                {% endif %}
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}

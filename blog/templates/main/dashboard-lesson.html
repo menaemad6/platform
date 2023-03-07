@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}{{post.title}} - {{post.teacher_name}}{% endblock title %}
+
+
+{% block content %}
+<body>
+
+
+
+
+
+
+    {% if user_profile.instructor == True %}
+    <!-- Detail Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-5">
+                        <h1 class="mb-2">{{post.title}}</h1>
+                        <h6 class="text-primary mb-5"><span style="font-weight: bold; font-size: 20px; text-transform: uppercase;">{{post.subject}} ,</span> {{post.created_at|date:"M d, Y"}} </h6>
+
+
+                        <video controls="controls" preload="preload" class="w-100">
+                            <source src="{{post.video.url}}" type="video/mp4"></source>
+                        </video>
+
+                        <div class="video-caption" style="overflow: hidden;">
+                            <p class="mt-3">{{post.caption}}</p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <!-- Author Bio -->
+                    <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
+
+
+                        {% if user_profile.premium == True %}
+                        <img src="{{post.teacher_img.url}}" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
+                        {% else %}
+                        <img src="{% static 'img/default-profile-image.jpg' %}" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
+                        {% endif %}
+
+                        {% if user_profile.premium == True %}
+                        <h3 class="text-primary mb-1" style="text-transform: uppercase;">{{post.teacher_name}}</h3>
+                        {% else %}
+                        <h3 class="text-primary mb-1" style="text-transform: uppercase;">{{post.user}}</h3>
+                        {% endif %}
+                        <h3 class="text-secondary mb-1" style="font-size: 18px; text-transform: uppercase;">{{post.subject}}</h3>
+                        <!-- <p class="text-white m-0">{{video.user.bio}}</p> -->
+                    </div>
+
+
+
+
+
+                    <!-- Recent Post -->
+                    <div class="mb-5">
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 2px;">Recent Videos</h3>
+
+
+
+                        {% for post in posts reversed %}
+                        <a class="d-flex align-items-center text-decoration-none mb-3" href="{{post.slug}}">
+
+                            {% if post.image %}
+                            <img class="img-fluid rounded" src="{{post.image.url}}" style="width: 50%;">
+                            {% else %}
+                            <img class="img-fluid" src="{% static 'img/course-2.jpg' %}">
+                            {% endif %}
+
+                            <div class="pl-3">
+                                <h6 class="m-1">{{post.title}}</h6>
+                                <small class="ml-2">{{post.created_at|date:"M d, Y"}}</small>
+                            </div>
+                        </a>
+                        {% endfor %}
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Detail End -->
+    {% endif %}
+
+
+    {% if user_profile.instructor == False %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Instructor To View Dashboard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+</body>
+
+{% endblock content %}
+
+
+
+
+
+
+

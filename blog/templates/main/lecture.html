@@ -1,0 +1,896 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}{{post.title}} - {{post.user}}{% endblock title %}
+
+
+
+
+{% block head %}
+
+
+<style>
+    .attachment {
+        padding: 10px;
+    }
+
+    .attachment h6 {}
+
+    .attachment:hover {
+        background-color: #E0E0E0;
+    }
+
+    .lesson-video {
+        width: 70%;
+    }
+
+    @media screen and (max-width:906px) {
+        .lesson-video {
+            width: 100%;
+        }
+    }
+</style>
+
+{% endblock head %}
+
+{% block content %}
+
+<body>
+
+
+
+
+
+
+    {% if user_profile.premium == True %}
+
+    {% if text == 'yes' %}
+
+    <div class="container-fluid" style="background-color: #f1f1f1;">
+        <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+            <div class="row " style="border: 1px rgb(220, 207, 207) solid;">
+
+                <div class="mt-4 w-100" >
+
+                    <div class="header" style="overflow: hidden; padding-left: 20px; padding-right: 20px; width: 100%;  display: flex; flex-direction: row; justify-content: space-between;">
+
+                        <div style="max-width: 90%;">
+                            <h1 class="mb-2" style="color: #fd771e;; font-size: 43px; font-weight: bolder;">
+                                {{post.title}}
+
+                            </h1>
+                        </div>
+
+                        <div >
+                            <h1 class="mb-2" style="color: #fd771e;; font-size: 43px; font-weight: bolder;">
+                                {% if like == 'yes' %}
+                                <a href="/like-lesson?post_id={{post.id}}" style="text-decoration: none;" data-toggle="tooltip"
+                                    data-placement="down" title="{{post.no_of_likes}} Likes">
+                                    <i class="fa-solid fa-bookmark ml-4" style="font-size: 45px; color: #fd771e;"></i>
+                                </a>
+                                {% endif %}
+        
+                                {% if like == 'no' %}
+                                <a href="/like-lesson?post_id={{post.id}}" style="text-decoration: none;" data-toggle="tooltip"
+                                    data-placement="down" title="{{post.no_of_likes}} Likes">
+                                    <i class="fa-regular fa-bookmark ml-4" style="font-size: 45px; color: #fd771e;"></i>
+                                </a>
+                                {% endif %}
+                            </h1>
+                        </div>
+                    
+                    </div>
+
+                    <div class="details" style="width: 100%; padding-left: 20px; padding-right: 20px;">
+                        <h6 class="" style="text-transform: capitalize; color: black;"><span
+                            style="font-weight: bold; font-size: 20px; text-transform: uppercase;">
+                            {% if post.teacher_img %}
+                            <img src="{{post.teacher_img.url}}" class="img-fluid rounded-circle mx-auto "
+                                style="width: 50px;">
+                            {% else %}
+                            <img src="{% static 'img/default-profile-image.jpg' %}"
+                                class="img-fluid rounded-circle mx-auto " style="width: 50px;">
+                            {% endif %}
+                            </span>
+                            <span style="font-size: 25px; color: black; font-weight: 600;">{{post.teacher_name}} </span>, {{post.subject}} </h6>
+
+                    <h8 class="text-black"><span
+                            style="font-size: 18px; text-transform: uppercase; ">{{post.created_at|date:"M d, Y"}}</h8>
+                    </div>
+
+
+
+                    
+
+
+
+                </div>
+
+
+
+                <div class="tab-content col-12">
+                    <div id="lesson" class="tab-pane fade in ">
+
+                        <div class="col-12 mb-4" style="border-bottom: 1px rgb(220, 207, 207) solid;">
+                            <div>
+
+                                <div class="text-center mt-5 mb-2">
+                                    <video controls="controls" preload="preload" class="lesson-video">
+                                        <source src="{{post.video.url}}" type="video/mp4">
+                                        </source>
+                                    </video>
+                                </div>
+
+                                <div class="video-caption mt-3 mb-3" style="overflow: hidden;">
+                                    <p class="mt-3">{{post.caption}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+                    <div id="homework" class="tab-pane fade">
+
+                        <div class="col-12 mb-5" style="border-bottom: 1px rgb(220, 207, 207) solid;">
+                            <div>
+
+
+
+
+
+
+
+                                {% if post.attach1_link %}
+                                <a class="d-flex align-items-center text-decoration-none mb-4 attachment mt-5"
+                                    href="{{post.attach1_link}}">
+                                    {% if post.attach1_type == 'homework' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-homework.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+                                    {% if post.attach1_type == 'test' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-test.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+                                    {% if post.attach1_type == 'link' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-link.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+
+                                    {% if post.attach1_type == 'homework' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Homework Sheet</h6>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if post.attach1_type == 'test' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Test Sheet</h6>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if post.attach1_type == 'link' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Link</h6>
+                                    </div>
+                                    {% endif %}
+
+                                </a>
+                                {% endif %}
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div id="test" class="tab-pane fade">
+                        <div class="col-12 mb-5" style="border-bottom: 1px rgb(220, 207, 207) solid;">
+                            <div>
+
+
+
+
+
+
+
+                                {% if post.attach2_link %}
+                                <a class="d-flex align-items-center text-decoration-none mb-4 mt-5 attachment"
+                                    href="{{post.attach2_link}}">
+                                    {% if post.attach2_type == 'homework' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-homework.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+                                    {% if post.attach2_type == 'test' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-test.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+                                    {% if post.attach2_type == 'link' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-link.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+
+                                    {% if post.attach2_type == 'homework' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Homework Sheet</h6>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if post.attach2_type == 'test' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Test Sheet</h6>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if post.attach2_type == 'link' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Link</h6>
+                                    </div>
+                                    {% endif %}
+                                </a>
+                                {% endif %}
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="link" class="tab-pane fade">
+                        <div class="col-12 mb-5" style="border-bottom: 1px rgb(220, 207, 207) solid;">
+                            <div>
+
+
+
+
+                                {% if post.attach3_link %}
+                                <a class="d-flex align-items-center text-decoration-none mb-4 mt-5 attachment"
+                                    href="{{post.attach3_link}}">
+                                    {% if post.attach3_type == 'homework' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-homework.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+                                    {% if post.attach3_type == 'test' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-test.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+                                    {% if post.attach3_type == 'link' %}
+                                    <img class="img-fluid" src="{% static 'img/lesson-link.png' %}"
+                                        style="width: 100px; height: 100px;">
+                                    {% endif %}
+
+
+                                    {% if post.attach3_type == 'homework' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Homework Sheet</h6>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if post.attach3_type == 'test' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Test Sheet</h6>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if post.attach3_type == 'link' %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">Link</h6>
+                                    </div>
+                                    {% endif %}
+
+
+                                </a>
+                                {% endif %}
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+                <div class="col-12">
+                    <ul class="nav nav-tabs w-100">
+
+                        <li class="active w-100 attachment" style="">
+                            <a data-toggle="tab" class="d-flex align-items-center text-decoration-none mb-3 attachment"
+                                href="#lesson">
+                                <span class="" id="basic-addon1" style="width: 140px;">
+
+                                    <i class="fa fa-2x fa-video text-primary mr-3" style="font-size: 80px;"></i>
+
+                                </span>
+                                <div class="pl-3">
+                                    <h6 class="m-1" style="text-transform: capitalize;">Lesson</h6>
+                                </div>
+                            </a>
+                        </li>
+                        {% if post.attach1_link %}
+                        <h3 class="text-uppercase mb-4 w-100 pt-5"
+                            style="letter-spacing: 5px; border-top: 1px rgb(220, 207, 207) solid; margin-left: 20px;">
+                            Attachments</h3>
+
+                        <!-- <h6
+                            style="border-top: 1px rgb(220, 207, 207) solid; width: 100%;padding-top: 20px; color: black; font-weight: bold; font-size: 40px; margin-top: 20px; margin-bottom: 20px;">
+                            Attachments</h6> -->
+                        {% endif %}
+
+
+                        {% if post.attach1_link %}
+                        <li class=" w-100 attachment">
+                            <a data-toggle="tab" class="d-flex align-items-center text-decoration-none mb-3 attachment"
+                                href="#{{post.attach1_type}}">
+                                <span class="" id="basic-addon1" style="width: 140px;">
+
+                                    {% if post.attach1_type == 'homework' %}
+                                    <i class="fa fa-2x fa-pen text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                    {% if post.attach1_type == 'test' %}
+                                    <i class="fa fa-2x fa-file text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                    {% if post.attach1_type == 'link' %}
+                                    <i class="fa fa-2x fa-link text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                </span>
+                                <div class="pl-3">
+                                    <h6 class="m-1" style="text-transform: capitalize;">{{post.attach1_type}}</h6>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if post.attach2_link %}
+                        <li class=" w-100 attachment">
+                            <a data-toggle="tab" class="d-flex align-items-center text-decoration-none mb-3 attachment"
+                                href="#{{post.attach2_type}}">
+                                <span class="" id="basic-addon1" style="width: 140px;">
+
+                                    {% if post.attach2_type == 'homework' %}
+                                    <i class="fa fa-2x fa-pen text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                    {% if post.attach2_type == 'test' %}
+                                    <i class="fa fa-2x fa-file text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                    {% if post.attach2_type == 'link' %}
+                                    <i class="fa fa-2x fa-link text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                </span>
+                                <div class="pl-3">
+                                    <h6 class="m-1" style="text-transform: capitalize;">{{post.attach2_type}}</h6>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+
+
+                        {% if post.attach3_link %}
+                        <li class=" w-100 attachment">
+                            <a data-toggle="tab" class="d-flex align-items-center text-decoration-none mb-3 attachment"
+                                href="#{{post.attach3_type}}">
+                                <span class="" id="basic-addon1" style="width: 140px;">
+
+                                    {% if post.attach3_type == 'homework' %}
+                                    <i class="fa fa-2x fa-pen text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                    {% if post.attach3_type == 'test' %}
+                                    <i class="fa fa-2x fa-file text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                    {% if post.attach3_type == 'link' %}
+                                    <i class="fa fa-2x fa-link text-primary mr-3" style="font-size: 80px;"></i>
+                                    {% endif %}
+
+                                </span>
+                                <div class="pl-3">
+                                    <h6 class="m-1" style="text-transform: capitalize;">{{post.attach3_type}}</h6>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+
+
+
+
+
+
+
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-12" id="comments">
+
+
+                    <!-- Comment List -->
+
+
+                    <!-- <div class="mb-5 my-5">
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Comments ({{post.no_of_comments}})
+                        </h3>
+
+
+
+
+                        {% for comment in comments  %}
+                        <div class="media mb-4">
+                            {% if comment.username_image %}
+                            <img src="{{comment.username_image.url}}" class="img-fluid rounded-circle mr-3 mt-1"
+                                style="width: 45px;" alt="">
+                            {% else %}
+                            <img src="{% static 'img/default-profile-image.jpg' %}"
+                                class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px;" alt="">
+                            {% endif %}
+
+
+                            <div class="media-body">
+                                <h6>{{comment.username_name}} <small><i>{{comment.created_at}}</i></small></h6>
+                                <p>{{comment.comment}}</p>
+
+
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Reply
+                                    </button>
+                                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+
+                                        <form action="/reply" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+
+                
+                                            <input type="hidden" value="{{user.username}}" name="user" hidden />
+                                            <input type="hidden" value="{{comment.comment_id}}" name="comment" hidden />
+                                            <input type="hidden" value="{{post.id}}" name="post" hidden />
+                                            <input type="hidden" value="{{user_profile.image}}" name="user-image" hidden />
+                
+                                            <div class="form-group">
+                                                <label for="message">Reply to {{comment.username_name}} </label>
+                                                <textarea name="reply" id="message" cols="30" rows="2"
+                                                    class="form-control border-0"></textarea>
+                                            </div>
+
+                                            <div class="form-group mb-0">
+                                                <input type="submit" value="Reply"
+                                                    class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                  </div>
+
+                                <button class="btn btn-sm btn-secondary">Reply</button>
+
+
+
+
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        {% for reply in replys  %}
+                        <div class="media mt-4">
+                            <img src="{{reply.username_image.url}}" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
+                                style="width: 45px;">
+                            <div class="media-body">
+                                <h6>{{reply.username_name}} <small><i>{{reply.created_at}}</i></small></h6>
+                                <p>{{reply.created_at}}</p>
+                                <button class="btn btn-sm btn-secondary">{{reply.reply}}</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                    </div> -->
+
+                    <!-- Comment Form -->
+                    <div class="rounded">
+                        <h3 class="text-uppercase mb-4 w-100 pt-5"
+                            style="letter-spacing: 5px; border-top: 1px rgb(220, 207, 207) solid; margin-left: 20px;">
+                            Questions</h3>
+
+                        <form action="/comment" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!-- <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" class="form-control border-0" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control border-0" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="url" class="form-control border-0" id="website">
+                            </div> -->
+
+                            <input type="hidden" value="{{user.username}}" name="user" hidden />
+                            <input type="hidden" value="{{post.id}}" name="post" hidden />
+                            <input type="hidden" value="{{user_profile.image}}" name="user-image" hidden />
+                            <input type="hidden" value="{{post.user}}" name="commented-to" hidden />
+
+                            <div class="form-group">
+                                <label for="message" style="margin-left: 20px;">Do you have any questions?</label>
+
+                                <div style="padding-left: 20px; padding-right: 20px;">
+                                <textarea name="comment" id="message" cols="0" rows="5"
+                                    style="background-color: white;" placeholder="Now you can ask any question to your teacher."
+                                    class="form-control border-0"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="form-group  mb-5 mt-3" style="padding-left: 20px; padding-right: 20px;">
+                                <input type="submit" value="Send" class="btn btn-primary font-weight-semi-bold w-100"
+                                   >
+                                   <p class="text-base">Answers from your teacher will be in your <a href="/inbox" class="">inbox </a></p>
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endif %}
+
+    {% if text == 'no' %}
+
+
+
+    <!-- Lesson Detail Start -->
+    <div class="container-fluid py-5" style="background-color: #f1f1f1;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <!-- <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Lessons</h5> -->
+                <!-- <h1 class="">You Must Purchase This Lesson First To View It!</h1> -->
+            </div>
+
+
+            <div class="row" style="padding: 10px;">
+
+                <div class="col-12 col-lg-7">
+                    <div class="box text-center"
+                        style="background-color: white; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;">
+                        <div>
+                            <h1 class="" style="color: black; font-size: 25px;">{{post.title}}</h1>
+                        </div>
+                    </div>
+
+                    <div class="box" style="background-color: white; padding: 20px; margin-bottom: 20px;">
+                        {% if post.image %}
+                        <img class="img-fluid" src="{{post.image.url}}" style="width: 100%;">
+                        {% else %}
+                        <img class="img-fluid" src="{% static 'img/course-3.jpg' %}" alt="">
+                        {% endif %}
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-12 col-lg-5">
+
+                    <div class="box" style="background-color: white; padding: 15px;">
+                        <!-- <div style="margin-bottom: 20px;">
+                            <h1 class="" style="color: black; font-size: 23px;"><span
+                                    style="border-bottom: 3px #fd771e solid;">Purchase</span></h1>
+                        </div> -->
+
+                        <a href="/lessons/{{post.id}}" class="btn btn-success w-100 w-100"
+                            style="border-radius: 0; border: 0;">
+
+                            <span style="font-size: 10px;"><i class="fa fa-2x fa-money-bill mr-3"></i></span>Purchase
+                        </a>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="box" style="background-color: white; margin-top: 50px; padding: 15px;">
+                        <div>
+                            <h1 class="" style="color: black; font-size: 23px;"><span
+                                    style="border-bottom: 3px #fd771e solid;">Details</span></h1>
+                        </div>
+
+                        <div style="margin-top: 40px; margin-bottom: 10px;">
+                            <p>
+                                <i class="fa-solid fa-money-bill text-primary" style="font-size: 20px;"></i>
+                                <span
+                                    style="margin-left: 10px; font-size: 18px; color: black; text-transform: capitalize;">Price
+                                    : <span style="color: #5b5e5e;">{{post.price}} EGP</span></span>
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 20px; margin-bottom: 10px;">
+                            <p>
+                                <i class="fa-solid fa-calendar-days text-primary" style="font-size: 20px;"></i>
+                                <span
+                                    style="margin-left: 10px; font-size: 18px; color: black; text-transform: capitalize;">Date
+                                    : <span style="color: #5b5e5e;">{{post.created_at|date:"SHORT_DATE_FORMAT"}}
+                                    </span></span>
+                            </p>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Lesson Detail End -->
+
+
+
+    <!-- Old Start -->
+
+
+
+    <!-- <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+
+                <h1 class="">You Must Purchase This Lesson First To View It!</h1>
+            </div>
+            <div class="row justify-content-center">
+
+
+
+
+                <div class="col-lg-6 col-md-6 mb-4" style="position: relative;">
+                    <div class="rounded overflow-hidden mb-2">
+                        {% if post.image %}
+                        <img class="img-fluid" src="{{post.image.url}}">
+                        {% else %}
+                        <img class="img-fluid" src="{% static 'img/course-3.jpg' %}" alt="">
+                        {% endif %}
+
+                        <div class="bg-secondary p-4">
+                            <div class="d-flex justify-content-between mb-3">
+                                <small class="m-0" style="text-transform: uppercase;">
+
+                                    {% if post.teacher_img %}
+                                    <img src="{{post.teacher_img.url}}" class="rounded-circle "
+                                        style="width:40px; border-radius: 10px; max-height: 50px; margin-right: 5px;"
+                                        alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/default-profile-image.jpg' %}" class="rounded-circle "
+                                        style="width:40px; border-radius: 10px; max-height: 50px; margin-right: 5px;"
+                                        alt="">
+                                    <img src="">
+                                    {% endif %}
+
+
+
+                                    {{post.teacher_name}}
+                                </small>
+                                <span class="m-0" style="text-decoration: none;">
+                                    <a href="/like-post?post_id={{post.id}}" style="text-decoration: none;">
+                                        <i class="far fa-thumbs-up text-primary mr-2"
+                                            style="font-size: 22px; text-decoration: none;"></i>({{post.no_of_likes}})
+                                    </a>
+                                </span>
+
+
+
+                            </div>
+                            <span class="h5" href="/lessons/{{post.slug}}">{{post.title}}</span>
+
+                            <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0"><i
+                                            class="fa fa-clock text-primary mr-2"></i>{{post.created_at|date:"SHORT_DATE_FORMAT"}}
+                                    </h6>
+                                    <h6 class="m-0"><i class="fa fa-money-bill text-primary mr-2"
+                                            style="font-size: 25px;"></i><span
+                                            style="font-size: 30px; color: black;">{{post.price}}</span>
+                                    </h6>
+                                </div>
+
+                                <form action="/buy-lesson" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{user_profile.user}}" name="buyer" hidden />
+                                    <input type="hidden" value="{{post.id}}" name="post" hidden />
+
+
+
+                                  
+
+                                    <button type="submit" class="w-100 mt-4" style="border-radius: 0; border: 0;">
+                                        <a href="/buy-lesson?post_id={{post.id}}" class="btn btn-success w-100"
+                                            style="border-radius: 0;">
+                                            <span style="font-size: 10px;"><i
+                                                    class="fa fa-2x fa-money-bill mr-3"></i></span>Purchase</a>
+                                    </button>
+
+
+
+                                </form>
+
+
+                              
+
+
+
+                                <a href="/lessons" class="btn btn-dark w-100 mt-3" style="border-radius: 0;">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-solid fa-arrow-left mr-3"></i></span>Back</a>
+
+
+                                <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- Old End -->
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endif %}
+
+
+    {% if user_profile.premium == False %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Premium User To View Activities</p>
+                        <a href="get-premium" class="btn btn-success mt-3 w-100">Get Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+</body>
+
+{% endblock content %}

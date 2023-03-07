@@ -1,0 +1,519 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Ecourse - {% block title%}{% endblock title %}</title>
+
+    {% block head%}
+    {% endblock head %}
+
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Website Icon -->
+    <link href="{% static 'img/site-logo.png' %}" rel="icon">
+
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}">
+
+
+
+
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+
+    <style>
+        .nav-dropdown-icon:hover{
+            color: #ff6600;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid d-none d-lg-block">
+        <div class="row align-items-center py-4 px-xl-5">
+            <div class="col-lg-3">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                </a>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Our Center</h6>
+                        <small>128 , City , Sohag</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
+                        <small>course@gmail.com</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-phone text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
+                        <small>012 345 6789</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+
+
+
+            {% if user.is_authenticated %}
+
+
+
+
+
+            <div class="col-lg-9" id="main">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+
+
+
+                        <div class="nav-item dropdown d-none d-lg-block">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+
+                                {% if user_profile.image %}
+                                <img src="{{user_profile.image.url}}" class="rounded-circle "
+                                    style="width:60px; border-radius: 10px; max-height: 70px;" alt="">
+                                {% else %}
+                                <img src="{% static 'images/default-profile-image.jpg' %}" class="rounded-circle "
+                                    style="width:60px; border-radius: 10px;" alt="">
+                                <img src="">
+                                {% endif %}
+
+
+
+
+                            </a>
+                            <div class="dropdown-menu rounded-0 m-0">
+
+                                <!-- <a href="/profile/{{user.username}}" class="dropdown-item">View My Profile</a>
+                                <a href="/logout" class="dropdown-item">Logout</a> -->
+
+
+                                <a href="/profile/{{user.username}}" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon"
+                                    style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-user mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>View Profile
+                                </a>
+
+
+                                <div class="dropdown-divider"></div>
+                                {% if user_profile.instructor == True %}
+                                <a href=""></a>
+                                {% else %}
+
+                                {% if user_profile.money == None %}
+                                <a href="/wallet/recharge" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon"
+                                    style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-money-bill mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Your Wallet:
+                                    0 EGP
+                                </a>
+                                {% else %}
+
+                                <p class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-money-bill mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Your Wallet:
+                                    {{user_profile.money}} EGP
+                                </p>
+
+                                <a href="/wallet/recharge" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-money-bill-transfer mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>
+                                    Recharge
+                                </a>
+
+                                {% endif %}
+                                {% endif %}
+
+
+                                {% if user_profile.instructor == False %}
+                                <div class="dropdown-divider"></div>
+                                <a href="/inbox" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-envelope mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Inbox
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                {% endif %}
+
+                                
+                                <a href="/logout" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-right-from-bracket mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Logout
+                                </a>
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="navbar-nav py-0">
+                            <a href="/" class="nav-item nav-link">Home</a>
+
+
+
+
+                            {% if user_profile.instructor == True %}
+                            <a href="/dashboard" class="nav-item nav-link d-lg-none d-block">Dashboard</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+                            {% if user_profile.instructor == False %}
+                            {% if user_profile.premium == True %}
+                            <a href="/lessons" class="nav-item nav-link d-block d-lg-none">Your Activity</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+
+                            {% if user_profile.premium == False %}
+                            <a href="/get-premium" class="nav-item nav-link d-block d-lg-none">Get
+                                Premium</a>
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+
+                            {% else %}
+                            <a href=""></a>
+                            {% endif %}
+
+                            <a href="/news" class="nav-item nav-link">News</a>
+
+
+                            <div class="nav-item dropdown d-block d-lg-none">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    {% if user_profile.image %}
+                                    <img src="{{user_profile.image.url}}" class="rounded-circle "
+                                        style="width:60px; border-radius: 10px; max-height: 70px;" alt="">
+                                    {% else %}
+                                    <img src="{% static 'images/default-profile-image.jpg' %}" class="rounded-circle "
+                                        style="width:60px; border-radius: 10px;" alt="">
+                                    <img src="">
+                                    {% endif %}
+                                    My Profile
+                                </a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <!-- <a href="/profile/{{user.username}}" class="dropdown-item">View My Profile</a>
+                                    <a href="/logout" class="dropdown-item">Logout</a> -->
+
+                                    <a href="/profile/{{user.username}}" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon"
+                                    style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-user mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>View Profile
+                                </a>
+
+
+                                    <div class="dropdown-divider"></div>
+                                    {% if user_profile.instructor == True %}
+                                    <a href=""></a>
+                                    {% else %}
+
+                                    {% if user_profile.money == None %}
+                                    <a href="/wallet/recharge" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon"
+                                    style="border-radius: 0;">
+                                    <i class="fa fa-2x fa-money-bill mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Your Wallet:
+                                    0 EGP
+                                </a>
+                                    {% else %}
+
+                                    <p class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                        <i class="fa fa-2x fa-money-bill mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Your Wallet:
+                                        {{user_profile.money}} EGP
+                                    </p>
+    
+                                    <a href="/wallet/recharge" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                        <i class="fa fa-2x fa-money-bill-transfer mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>
+                                        Recharge
+                                    </a>
+
+
+                                    <!-- <a href="/wallet/recharge" class="dropdown-item">Your Wallet: {{user_profile.money}}
+                                        EGP</a> -->
+                                    {% endif %}
+                                    {% endif %}
+
+                                    {% if user_profile.instructor == False %}
+                                    <div class="dropdown-divider"></div>
+                                    <a href="/inbox" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                        <i class="fa fa-2x fa-envelope mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Inbox
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    {% endif %}
+    
+                                    
+                                    <a href="/logout" class="btn btn-primary dropdown-item w-100 nav-dropdown-icon" style="border-radius: 0;">
+                                        <i class="fa fa-2x fa-right-from-bracket mr-3 nav-dropdown-icon" style="font-size: 18px;"></i>Logout
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+
+
+
+
+
+
+
+            {% if user_profile.instructor == True %}
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="/dashboard"
+                    class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                    style="height: 67px; padding: 0 30px;">
+                    <h5 class="text-primary m-0"><i class="fa fa-pen mr-2"></i>Dashboard</h5>
+                </a>
+            </div>
+            {% else %}
+            <a href=""></a>
+            {% endif %}
+
+            {% if user_profile.instructor == False %}
+
+
+            {% if user_profile.premium == True %}
+            <div class="col-lg-3 d-none d-lg-block ">
+                <a href="/lessons"
+                    class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                    style="height: 67px; padding: 0 30px;">
+                    <h5 class="text-primary m-0"><i class="fa fa-book mr-2"></i>Your Activity</h5>
+                </a>
+            </div>
+            {% else %}
+            <a href=""></a>
+            {% endif %}
+
+            {% if user_profile.premium == False %}
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="/get-premium"
+                    class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                    style="height: 67px; padding: 0 30px;">
+                    <h5 class="text-primary m-0"><i class="fa fa-pen mr-2"></i>Get Premium</h5>
+                </a>
+            </div>
+            {% else %}
+            <a href=""></a>
+            {% endif %}
+
+
+
+            {% else %}
+            <a href=""></a>
+            {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+            {% else %}
+
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+
+                        <div class="navbar-nav py-0">
+                            <a href="/" class="nav-item nav-link">Home</a>
+
+                            <a href="get-premium" class="nav-item nav-link d-block d-lg-none">Get
+                                Premium</a>
+
+                            <a href="news" class="nav-item nav-link">News</a>
+
+
+                            <a href="signup" class="nav-item nav-link">Sign up</a>
+                            <a class="nav-item nav-link" href="signin">Login</a>
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="get-premium"
+                    class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                    style="height: 67px; padding: 0 30px;">
+                    <h5 class="text-primary m-0"><i class="fa fa-pen mr-2"></i>Get Premium</h5>
+                </a>
+            </div>
+
+
+            {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+
+    {% block content%}
+    {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-lg-5" style="margin-top: 0px;">
+        <div class="row pt-5">
+            <div class="col-lg-7 col-md-12">
+                <div class="row">
+                    <div class="col-md-6 mb-5">
+                        <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Get In Touch</h5>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                        <div class="d-flex justify-content-start mt-4">
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Our Lessons</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Web Design</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Apps Design</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Marketing</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Research</a>
+                            <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>SEO</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12 mb-5">
+                <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Who Are We</h5>
+                <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu
+                    kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
+                <div class="w-100">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+
+
+    <script src="https://kit.fontawesome.com/1454af8120.js" crossorigin="anonymous"></script>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+</body>
+
+</html>

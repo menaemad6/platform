@@ -1,0 +1,309 @@
+{% load static %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <title>Ecourse - Login</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <!-- Website Icon -->
+    <link href="{% static 'img/site-logo.png' %}" rel="icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid d-none d-lg-block">
+        <div class="row align-items-center py-4 px-xl-5">
+            <div class="col-lg-3">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                </a>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Our Center</h6>
+                        <small>128 , City , Sohag</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
+                        <small>course@gmail.com</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-phone text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
+                        <small>012 345 6789</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    {% if user.is_authenticated %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Are Already Signed In</p>
+                        <a href="/" class="btn btn-success w-100" data-ripple="">
+                            <span style="font-size: 10px;"><i class="fa fa-2x fa-home mr-3"></i></span>Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+
+
+
+
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+
+                        <div class="navbar-nav py-0">
+
+
+
+                            <button type="button" data-toggle="modal" data-target="#login" class="nav-item nav-link"
+                                style="border: 0; background-color: white; height: fit-content;">Login</button>
+
+                            <!-- <button class="nav-item nav-link"
+                                style="border: 0; background-color: white; height: fit-content;"><a
+                                    class="nav-item nav-link" href="/signup">Register</a></button> -->
+                            <button type="button" class="nav-item nav-link"
+                                style="border: 0; background-color: white; height: fit-content;">
+                                <a href="/signup" class="nav-link" style="text-decoration: none; padding: 0;">Register</a></button>
+
+
+                                <!-- <a class="nav-item nav-link" href="/signup">Register</a> -->
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-lg-3 d-none d-lg-block">
+
+                <button data-toggle="modal" data-target="#login" type="button"
+                    class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                    style="height: 67px; padding: 0 30px; border: 0;">
+                    <h5 class="text-primary m-0"><i class="fa fa-right-to-bracket mr-2"></i>Login</h5>
+                </button>
+
+
+
+            </div>
+
+
+
+            <!-- Login -->
+            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                Login
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form method="POST" style="margin-top: 5px; margin-bottom: 10px;">
+                            {% csrf_token %}
+                            <div class="modal-body">
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fa fa-2x fa-user text-primary mr-3"
+                                                style="font-size: 20px;"></i></span>
+                                    </div>
+                                    <input type="text" name="username" class="form-control p-4" placeholder="Username"
+                                        aria-label="Username" aria-describedby="basic-addon1"
+                                        data-validation-required-message="Enter Your Username">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fa fa-2x fa-key text-primary mr-3"
+                                                style="font-size: 20px;"></i></span>
+                                    </div>
+
+                                    <input type="password" name="password" class="form-control p-4"
+                                        placeholder="Enter Your Password" aria-label="Username"
+                                        aria-describedby="basic-addon1"
+                                        data-validation-required-message="Enter Your Password">
+
+                                </div>
+
+                                <p class="text-base"> Not registered? <a href="/signup" class=""> Create a account </a></p>
+
+
+
+
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary py-2 px-2 w-100" type="submit"
+                                    id="sendMessageButton">Login</button>
+                            </div>
+
+                        </form>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!--  Login -->
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#header-carousel" data-slide-to="1"></li>
+                <li data-target="#header-carousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+
+                <div class="carousel-item active" style="min-height: 80vh;">
+                    <img class="position-relative w-100" src="{% static 'img/carousel-1.jpg' %}"
+                        style="min-height: 80vh; object-fit: cover;">
+                    <div class="carousel-caption d-flex align-items-center justify-content-center">
+                        <div class="p-5" style="width: 100%; max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
+                            <h1 class="display-3 text-white mb-md-4">Best Education From Your Home</h1>
+                            <!-- <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="min-height: 80vh;">
+                    <img class="position-relative w-100" src="{% static 'img/carousel-2.jpg' %}"
+                        style="min-height: 80vh; object-fit: cover;">
+                    <div class="carousel-caption d-flex align-items-center justify-content-center">
+                        <div class="p-5" style="width: 100%; max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
+                            <h1 class="display-3 text-white mb-md-4">Best Online Learning Platform</h1>
+                            <!-- <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="min-height: 80vh;">
+                    <img class="position-relative w-100" src="{% static 'img/carousel-3.jpg' %}"
+                        style="min-height: 80vh; object-fit: cover;">
+                    <div class="carousel-caption d-flex align-items-center justify-content-center">
+                        <div class="p-5" style="width: 100%; max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
+                            <h1 class="display-3 text-white mb-md-4">New Way To Learn From Home</h1>
+                            <!-- <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+    {% endif %}
+
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+
+
+    <script src="https://kit.fontawesome.com/1454af8120.js" crossorigin="anonymous"></script>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+
+
+
+
+</html>

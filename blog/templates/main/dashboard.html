@@ -1,0 +1,861 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Your Activity{% endblock title %}
+
+
+{% block content %}
+
+<body>
+
+
+
+
+
+    {% if user.is_authenticated %}
+
+
+    {% if user_profile.instructor == True %}
+    <!-- Header Start -->
+    <div class="container-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container">
+            <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+                <h3 class="display-4 text-white text-uppercase">Dashboard</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Dashboard</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+
+
+
+
+
+
+
+    <!-- Upload Start -->
+    <div class="container-fluid py-5" id="upload">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">New Video</h5>
+                <h1>Upload New Video</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5">
+                        <div id="success"></div>
+
+
+
+
+
+
+                        <form method="post" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa fa-2x fa-font text-primary mr-3"
+                                            style="font-size: 20px;"></i></span>
+                                </div>
+
+                                <input type="text" name="title" class="form-control p-4" placeholder="Lesson Title **"
+                                    aria-label="Username" aria-describedby="basic-addon1" required="required"
+                                    data-validation-required-message="Please Enter Lesson Title">
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="exampleFormControlFile1">Upload Video</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="video">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Upload Video Image (Thumbnail)</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                    name="thumbnail">
+                            </div>
+
+                            <div class="control-group">
+                                <textarea class="form-control border-0 py-3 px-4" rows="5" name="caption"
+                                    placeholder="Lesson Description **"></textarea>
+                            </div>
+
+
+
+
+                            <!-- <div class="control-group">
+                                <input type="text" class="form-control border-0 p-4" name="title"
+                                    placeholder="Lesson Title" required="required"
+                                    data-validation-required-message="Please enter video title" />
+                                <p class="help-block text-danger"></p>
+                            </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <!-- <div class="control-group">
+                                        <input type="text" class="form-control border-0 p-4"  name="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter video title" />
+                                        <p class="help-block text-danger"></p>
+                                    </div> -->
+
+                            <!-- <div class="control-group">
+                                        <input type="text" class="form-control border-0 p-4"  name="year" placeholder="Year" required="required" data-validation-required-message="Please enter video title" />
+                                        <p class="help-block text-danger"></p>
+                                    </div> -->
+
+
+                            <!-- <div class="form-group">
+                                <label for="exampleFormControlSelect1">Subject</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="subject">
+                                    <option value="arabic">Arabic</option>
+                                    <option value="english">English</option>
+                                    <option value="math">Math</option>
+                                    <option value="chemistry">Chemistry</option>
+                                    <option value="physics">Physics</option>
+                                    <option value="biology">Biology</option>
+                                    <option value="french">French</option>
+                                    <option value="german">German</option>
+                                </select>
+                            </div> -->
+
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Year **</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="year">
+                                    <option value="first">First Secondary</option>
+                                    <option value="second">Second Secondary</option>
+                                    <option value="third">Third Secondary</option>
+                                </select>
+                            </div>
+
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa fa-2x fa-money-bill text-primary mr-3"
+                                            style="font-size: 20px;"></i></span>
+                                </div>
+
+                                <input type="text" name="price" class="form-control p-4" placeholder="Lesson Price **"
+                                    aria-label="Username" aria-describedby="basic-addon1" required="required"
+                                    data-validation-required-message="Please Enter Lesson Price">
+                            </div>
+
+
+
+
+                            <!-- <div class="control-group">
+                                    <input type="text" class="form-control border-0 p-4" name="price"
+                                        placeholder="Lesson Price" required="required"
+                                        data-validation-required-message="Please enter video title" />
+                                    <p class="help-block text-danger"></p>
+                                </div> -->
+
+
+
+
+                            <div class="input-group mb-3" style="margin-top: 90px;">
+                                <select class="form-control" id="exampleFormControlSelect1" name="attach1_type">
+                                    <option value="homework">Homework Sheet</option>
+                                    <option value="test">Test Sheet</option>
+                                    <option value="link">Link</option>
+
+                                </select>
+                                <input name="attach1_link" type="text" class="form-control" placeholder="Link 1">
+                            </div>
+
+
+                            <div class="input-group mb-3" style="margin-top: 20px;">
+                                <select class="form-control" id="exampleFormControlSelect1" name="attach2_type">
+                                    <option value="test">Test Sheet</option>
+                                    <option value="homework">Homework Sheet</option>
+                                    <option value="link">Link</option>
+                                </select>
+                                <input name="attach2_link" type="text" class="form-control" placeholder="Link 2">
+                            </div>
+
+                            <div class="input-group mb-3" style="margin-top: 20px;">
+                                <select class="form-control" id="exampleFormControlSelect1" name="attach3_type">
+                                    <option value="link">Link</option>
+                                    <option value="homework">Homework Sheet</option>
+                                    <option value="test">Test Sheet</option>
+                                </select>
+                                <input name="attach3_link" type="text" class="form-control" placeholder="Link 3">
+                            </div>
+
+
+
+
+
+
+
+                            <div class="text-center">
+                                <button class="btn btn-primary py-3 px-5 w-100 mt-5" type="submit">Upload</button>
+                            </div>
+                        </form>
+
+
+
+
+                        <!-- Error Data -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        Full The Data First
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Upload End -->
+
+
+
+
+
+
+
+
+
+
+    <!-- Videos Start -->
+    <div class="container-fluid py-5" id="videos">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Videos</h5>
+                <h1>Videos</h1>
+            </div>
+            <div class="row">
+
+
+
+
+
+
+                {% for post in posts reversed %}
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="rounded overflow-hidden mb-2">
+                        {% if post.image %}
+                        <a href="/dashboard/{{post.id}}">
+                            <img class="img-fluid" src="{{post.image.url}}">
+                        </a>
+                        {% else %}
+                        <a href="/dashboard/{{post.id}}">
+                            <img class="img-fluid" src="{% static 'img/course-3.jpg' %}" alt="">
+                        </a>
+                        {% endif %}
+
+                        <div class="bg-secondary p-4">
+                            <div class="d-flex justify-content-between mb-3">
+                                <small class="m-0" style="text-transform: uppercase;">
+
+                                    {% if post.teacher_img %}
+                                    <img src="{{post.teacher_img.url}}" class="rounded-circle "
+                                        style="width:40px; border-radius: 10px; max-height: 50px; margin-right: 5px;"
+                                        alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/default-profile-image.jpg' %}" class="rounded-circle "
+                                        style="width:40px; border-radius: 10px; max-height: 50px; margin-right: 5px;"
+                                        alt="">
+                                    <img src="">
+                                    {% endif %}
+
+
+                                    <!-- <i class="fa fa-user text-primary mr-2"></i> -->
+                                    {{post.teacher_name}}
+                                </small>
+
+                                <span class="m-0" style="text-decoration: none;">
+
+                                    <i class="far fa-thumbs-up text-primary mr-2"
+                                        style="font-size: 22px; text-decoration: none;"></i>({{post.no_of_likes}})
+
+
+                                </span>
+
+                            </div>
+                            <a class="h5" href="/dashboard/{{post.slug}}">{{post.title}}</a>
+
+
+
+
+                            <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0"><i
+                                            class="fa fa-clock text-primary mr-2"></i>{{post.created_at|date:"SHORT_DATE_FORMAT"}}
+                                    </h6>
+
+
+                                </div>
+
+
+                                <div class="btn-group dropup w-100 mt-4">
+                                    <button type="button" class="btn btn-danger dropdown-toggle w-100"
+                                        style="border-radius: 0;" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <i class="fa fa-2x fa-trash mr-3" style="font-size: 18px;"></i>Delete Lesson
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <form action="/delete-lesson" method="POST"
+                                            style="margin-top: 5px; margin-bottom: 10px;">
+                                            {% csrf_token %}
+                                            <div class="modal-body">
+
+                                                <p>Are You Sure You Want To Delete ({{post.title}})?</p>
+
+                                                <input type="hidden" value="{{post.id}}" name="post-id" hidden />
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger pl-5 pr-5">Delete</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                                <!-- <button type="button" class="btn btn-danger w-100 mt-3" style="border-radius: 0;"
+                                    data-toggle="modal" data-target="#exampleModalCenter">
+                                    <i class="fa fa-2x fa-trash mr-3" style="font-size: 18px;"></i>Delete Lesson
+                                </button> -->
+
+
+                                <!-- Delete Lesson -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Lesson</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+
+                                            <form action="/delete-lesson" method="POST"
+                                                style="margin-top: 5px; margin-bottom: 10px;">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+
+                                                    <p>Are You Sure You Want To Delete ({{post.title}})?</p>
+
+                                                    <input type="hidden" value="{{post.id}}" name="post-id" hidden />
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit"
+                                                        class="btn btn-danger pl-5 pr-5">Delete</button>
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Delete Lesson -->
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Videos End -->
+
+
+
+
+
+
+
+
+
+    <!-- Students Start -->
+    <div class="container-fluid " id="students">
+        <div class="container">
+
+
+            <div class="text-center">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Students</h5>
+                <h1>Students Profiles</h1>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9 text-center">
+                    <div class="contact-form bg-secondary rounded">
+                        <div id="success"></div>
+
+
+
+
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Name</th>
+                                    <th scope="col"></th>
+
+                                    <th scope="col">Wallet</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for profile in profiles %}
+                                <tr>
+                                    <td><a href="/profile/{{profile.user}}">{{profile.user}}</a></td>
+
+
+
+                                    <!-- {% if profile.premium == True %}
+                                    <td>{{profile.premium}}</td>
+                                    {% endif %}
+
+                                    {% if profile.premium == False %}
+                                    <td>{{profile.premium}}</td>
+                                    {% endif %} -->
+
+                                    <td>
+
+
+                                        <div class="btn-group dropup">
+                                            <button type="button" class="btn btn-primary dropdown-toggle w-100"
+                                                style="border-radius: 0;" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Edit
+                                            </button>
+                                            <div class="dropdown-menu">
+
+
+                                                <button type="button" class="close mr-2" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+
+                                                <form action="/dashboard-edit-student" method="POST"
+                                                    style="margin-top: 5px; margin-bottom: 10px;">
+                                                    {% csrf_token %}
+                                                    <div class="modal-body">
+
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1"><i
+                                                                        class="fa fa-2x fa-money-bill text-primary mr-3"
+                                                                        style="font-size: 20px;"></i></span>
+                                                            </div>
+                                                            <input type="text" name="money" class="form-control"
+                                                                placeholder="Money" aria-label="Username"
+                                                                aria-describedby="basic-addon1"
+                                                                value="{{profile.money}}">
+                                                        </div>
+
+
+
+                                                        <input type="hidden" value="{{profile.id_user}}" name="student"
+                                                            hidden />
+
+
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit"
+                                                            class="btn btn-success pl-5 pr-5">Save</button>
+                                                    </div>
+                                                </form>
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <!-- <button type="button" class="btn btn-primary w-100" style="border-radius: 0;"
+                                            data-toggle="modal" data-target="#editstudent">
+                                            Edit
+                                        </button> -->
+                                    </td>
+
+                                    <td>
+                                        {{profile.money}}
+                                    </td>
+
+                                </tr>
+
+                                <!-- Edit Studnet -->
+                                <div class="modal fade" id="editstudent" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Student
+                                                    Wallet ({{profile.name}})
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+
+                                            <form action="/dashboard-edit-student" method="POST"
+                                                style="margin-top: 5px; margin-bottom: 10px;">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1"><i
+                                                                    class="fa fa-2x fa-money-bill text-primary mr-3"
+                                                                    style="font-size: 20px;"></i></span>
+                                                        </div>
+                                                        <input type="text" name="money" class="form-control"
+                                                            placeholder="Money" aria-label="Username"
+                                                            aria-describedby="basic-addon1" value="{{profile.money}}">
+                                                    </div>
+
+
+
+                                                    <input type="hidden" value="{{profile.id_user}}" name="student"
+                                                        hidden />
+
+
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit"
+                                                        class="btn btn-success pl-5 pr-5">Save</button>
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  Edit Studnet -->
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Students End -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Questions Start -->
+    <div class="container-fluid py-5" id="questions">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Questions</h5>
+                <h1>Student Questions</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="contact-form bg-secondary rounded p-3">
+                        <div id="success"></div>
+
+
+
+
+
+
+
+                        {% if questions|length == 0 %}
+                        <div class="contact-form bg-secondary rounded p-5 text-center">
+                            <div id="success"></div>
+                            <p style="font-size: 23px;">There Isnt Any Questions</p>
+                        </div>
+                        {% endif %}
+
+
+
+                        
+
+                        {% if questions|length >= 1 %}
+
+                        <div class="">
+
+
+
+                            {% for comment in questions  %}
+                            <div class="media mb-3 rounded">
+
+                                <!-- {% if comment.username_image %}
+                                <img src="{{comment.username_image.url}}" class="img-fluid rounded-circle mr-3 mt-1"
+                                    style="width: 45px;" alt="">
+                                {% else %} -->
+
+                                <!-- {% endif %} -->
+
+
+                                <img src="{% static 'img/default-profile-image.jpg' %}"
+                                class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px;" alt="">
+
+                                <div class="media-body bg-white" style="padding: 10px;">
+                                    <h6>{{comment.username_name}}
+                                        <small><i>{{comment.created_at|date:"M d, Y"}}</i></small></h6>
+                                    <p>{{comment.comment}}</p>
+
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle w-100" style="border-radius: 0;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Answer
+                                        </button>
+                                        <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+    
+                                            <form action="/reply" method="POST" enctype="multipart/form-data">
+                                                {% csrf_token %}
+    
+                    
+                                                <input type="hidden" value="{{user.username}}" name="user" hidden />
+                                                <input type="hidden" value="{{comment.comment_id}}" name="comment" hidden />
+
+                                                <input type="hidden" value="{{user_profile.image}}" name="user-image" hidden />
+                                                <input type="hidden" value="{{comment.username}}" name="replayed-to" hidden />
+                                                <input type="hidden" value="{{comment.comment}}" name="text" hidden />
+
+                                                
+                    
+                                                <div class="form-group" style="padding: 10px;">
+                                                    <label for="message">Reply to {{comment.username_name}} </label>
+                                                    <textarea name="reply" id="message" cols="30" rows="2"
+                                                        class="form-control border-0 bg-secondary"></textarea>
+                                                </div>
+    
+                                                <div class="form-group mb-0 " style="padding: 10px;">
+                                                    <input type="submit" value="Reply"
+                                                        class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold w-100">
+                                                </div>
+    
+                                            </form>
+    
+                                        </div>
+                                      </div>
+                                </div>
+
+                                
+
+
+                            </div>
+                            {% endfor %}
+
+
+                        </div>
+                        {% endif %}
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Questions End -->
+
+
+
+
+
+    <!-- Search Start -->
+    <div class="container-fluid py-5" id="search">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Search</h5>
+                <h1>Search Student</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5">
+                        <div id="success"></div>
+
+
+
+
+                        <form action="/search" method="POST">
+                            {% csrf_token %}
+
+
+                            <div class="input-group rounded mb-5">
+                                <input type="search" name="username" class="form-control rounded"
+                                    placeholder="Search For A Student" aria-label="Search"
+                                    aria-describedby="search-addon" />
+                                <button type="submit">
+                                    <span class="input-group-text border-0" id="search-addon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </button>
+
+                            </div>
+
+                            <!-- <div class="md-form active-purple-2 mb-5">
+                                <input class="form-control" type="text" name="username" placeholder="Search User" aria-label="Search">
+                                <button type="submit"><i class="fa fa-search fa-1x"></i></button>
+                            </div> -->
+
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    {% else %}
+    <a href=""></a>
+    {% endif %}
+
+
+
+    {% if user_profile.instructor == False %}
+    <!-- Error Instructor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Instructor To View Dashboard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Instructor End -->
+    {% else %}
+    <a href=""></a>
+    {% endif %}
+
+
+
+
+
+
+
+    {% else %}
+    <!-- Error Instructor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Instructor To View Dashboard</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Instructor End -->
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Recharge Requests{% endblock title %}
+
+
+{% block content %}
+
+
+<body>
+
+
+
+    {% if requests|length >= 1 %}
+    {% for request in requests %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-2">
+                        <div class="title text-center  pt-3 pb-2"
+                            style="color:#ff6600; font-size: 25px; font-weight: 600;">Recharge Request</div>
+
+                        <p style="font-size: 23px; padding-left: 20px;">Money Transfered : {{request.amount}}</p>
+                        <p style="font-size: 23px; padding-left: 20px;">Sender Number : {{request.sender_number}}</p>
+                        <p style="font-size: 23px; padding-left: 20px;">Wallet Number : {{request.wallet_number}}</p>
+                        <p style="font-size: 23px; padding-left: 20px;">Requested In :
+                            {{request.created_at|date:"SHORT_DATE_FORMAT"}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if requests|length == 0 %}
+    <!-- Error Recharge Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Didnt Request Recharging Your Wallet</p>
+                        <a href="/wallet/recharge" class="btn btn-success mt-3 w-100">Request Recharge</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Recharge End -->
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}

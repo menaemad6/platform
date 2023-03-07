@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Wallet Recharge{% endblock title %}
+
+
+{% block content %}
+
+
+<body>
+
+
+
+    {% if user.is_authenticated %}
+
+    {% if requests|length >= 1 %}
+
+
+        <!-- Charge Lists -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-md-6">
+    
+    
+                    <a href="/wallet/recharge"
+                        class="mb-3 d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                        style="height: 67px; padding: 0 30px; height: 100px;">
+                        <h5 class="text-primary m-0"><i class="fa fa-list mr-2"></i>Vodafone Cash Charge</h5>
+                    </a>
+    
+    
+                </div>
+    
+                <div class="col-12 col-md-6">
+    
+    
+                    <a href="/wallet/code-charge"
+                        class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                        style="height: 67px; padding: 0 30px; height: 100px;">
+                        <h5 class="text-primary m-0"><i class="fa fa-money-bill mr-2"></i>Code Charge</h5>
+                    </a>
+    
+    
+                </div>
+            </div>
+        </div>
+        <!-- Charge Lists -->
+
+
+
+
+    <!-- Error Recharge Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Have Already Requested Recharging Your Wallet</p>
+                        <a href="/wallet/requests" class="btn btn-success mt-3 w-100">View Your Request</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Recharge End -->
+    {% endif %}
+
+
+
+
+
+
+    {% if requests|length == 0 %}
+
+            <!-- Charge Lists -->
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+        
+        
+                        <a href="/wallet/recharge"
+                            class="mb-3 d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                            style="height: 67px; padding: 0 30px; height: 100px;">
+                            <h5 class="text-primary m-0"><i class="fa fa-list mr-2"></i>Vodafone Cash Charge</h5>
+                        </a>
+        
+        
+                    </div>
+        
+                    <div class="col-12 col-md-6">
+        
+        
+                        <a href="/wallet/code-charge"
+                            class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                            style="height: 67px; padding: 0 30px; height: 100px;">
+                            <h5 class="text-primary m-0"><i class="fa fa-money-bill mr-2"></i>Code Charge</h5>
+                        </a>
+        
+        
+                    </div>
+                </div>
+            </div>
+            <!-- Charge Lists -->
+
+
+
+    <!-- Wallet Recharge Start -->
+    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <div class="mb-4">
+                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Recharge Your Wallet</h5>
+                        <h1 class="text-white">Recharge To Purchase Any Lesson You Want</h1>
+                    </div>
+                    <p class="text-white">
+                        Note that: The maximum shipping value is 500 pounds, and it is not allowed to send more than one shipment per student on the same day</p>
+                    <ul class="list-inline text-white m-0">
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Type the net amount transferred</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Type the number sent to
+                            The wallet</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Type the number of the sender</li>
+                    </ul>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-light text-center p-4">
+                            <h1 class="m-0">Recharge</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-primary p-5">
+
+
+
+                            <form method="POST">
+
+                                {% csrf_token %}
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-2x fa-money-bill text-primary mr-3" style="font-size: 20px;"></i></span>
+                                    </div>
+                                    <input type="number" name="amount" class="form-control" placeholder="Money Amount" aria-label="Username" aria-describedby="basic-addon1">
+                                  </div>
+
+                                  <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-2x fa-money-bill-transfer text-primary mr-3" style="font-size: 20px;"></i></span>
+                                    </div>
+                                    <input type="number" name="sender" class="form-control" placeholder="Sender Number" aria-label="Username" aria-describedby="basic-addon1">
+                                  </div>
+
+
+
+
+                                <!-- <div class="form-group">
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Money Ammount"
+                                        required="required" name="amount" />
+                                </div> -->
+                                <!-- <div class="form-group">
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Your Wallet Number"
+                                        required="required" name="sender" />
+                                </div> -->
+                                <div class="form-group">
+                                    <select class="custom-select border-0 px-4" style="height: 47px;" name="wallet">
+                                        <option selected>Wallet Number</option>
+                                        <option value="01226102013">01226102013</option>
+
+                                    </select>
+                                </div>
+                                <div>
+                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit" data-toggle="modal" data-target="#exampleModal">Register</button>
+
+                                    <!-- <button type="button" class="btn btn-dark btn-block border-0 py-3" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        Launch demo modal
+                                    </button> -->
+
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Error Data -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                Full The Data First
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Wallet Recharge End -->
+    {% endif %}
+
+
+
+
+    {% else %}
+
+
+    <!-- Error Instructor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Login To Recharge Your Wallet</p>
+                        <a href="/signin" class="btn btn-success mt-3 w-100">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Instructor End -->
+
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}

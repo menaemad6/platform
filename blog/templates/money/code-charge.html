@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Wallet Recharge{% endblock title %}
+
+
+{% block content %}
+
+
+<body>
+
+
+
+    {% if user_profile.premium == True %}
+
+            <!-- Charge Lists -->
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+        
+        
+                        <a href="/wallet/recharge"
+                            class="mb-3 d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                            style="height: 67px; padding: 0 30px; height: 100px;">
+                            <h5 class="text-primary m-0"><i class="fa fa-list mr-2"></i>Vodafone Cash Charge</h5>
+                        </a>
+        
+        
+                    </div>
+        
+                    <div class="col-12 col-md-6">
+        
+        
+                        <a href="/wallet/code-charge"
+                            class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                            style="height: 67px; padding: 0 30px; height: 100px;">
+                            <h5 class="text-primary m-0"><i class="fa fa-money-bill mr-2"></i>Code Charge</h5>
+                        </a>
+        
+        
+                    </div>
+                </div>
+            </div>
+            <!-- Charge Lists -->
+
+            
+
+
+
+    <!-- Wallet Recharge Start -->
+    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <div class="mb-4">
+                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Recharge Your Wallet</h5>
+                        <h1 class="text-white">Recharge By Code</h1>
+                    </div>
+                    <!-- <p class="text-white">
+                        Note that: </p>
+                    <ul class="list-inline text-white m-0">
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Type the net amount transferred</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Type the number sent to
+                            The wallet</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Type the number of the sender</li>
+                    </ul> -->
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-light text-center p-4">
+                            <h1 class="m-0">Recharge</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-primary p-5">
+
+
+
+                            <form  action="/wallet/code-charge/request" method="POST" >
+
+                                {% csrf_token %}
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-2x fa-money-bill text-primary mr-3" style="font-size: 20px;"></i></span>
+                                    </div>
+                                    <input type="teext" name="code" class="form-control" placeholder="Code" aria-label="Username" aria-describedby="basic-addon1">
+                                  </div>
+                                <div>
+
+                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">Request</button>
+
+                                    <!-- <button type="button" class="btn btn-dark btn-block border-0 py-3" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        Launch demo modal
+                                    </button> -->
+
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Error Data -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                Full The Data First
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Wallet Recharge End -->
+
+
+
+
+
+    {% else %}
+
+
+    <!-- Error Instructor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Premium User To Recharge Codes</p>
+                        <a href="/get-premium" class="btn btn-success mt-3 w-100">Get Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Instructor End -->
+
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load static %}
+
+
+{% block title%}Search{% endblock title %}
+
+
+{% block content %}
+
+<body>
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+
+
+
+            <div class="col-12 mt-5">
+
+
+                <form action="/search" method="POST">
+                    {% csrf_token %}
+        
+                    <div class="input-group rounded mb-5">
+                        <input type="search" name="username" class="form-control rounded" placeholder="Search User" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" style="background-color: white ; border-color: #d9dde2; border: 2px solid #d9dde2; border-radius: 5px;">
+                            <span class="input-group-text border-0" id="search-addon" style="color: #ff6600; background-color: white">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+        
+                      </div>
+                </form>
+
+
+            </div>
+
+            <div class="col-12 col-lg-8">
+                <a href=""></a>
+            </div>
+
+
+
+            <div class="col-12 col-lg-4">
+                <p style="font-size: 21px;">Suggestions:</p>
+                {% for suggestion in suggestions_username_profile_list %}
+                <div class="search-item w-100 mt-3"
+                    style="background-color: #f2f1f8; height: 150px; display: flex; flex-direction: row; overflow: hidden; padding: 10px; border-radius: 10px; position: relative;">
+                    <div class="left-side" style="width: 130px; ">
+
+                        {% if suggestion.image %}
+                        <img src="{{suggestion.image.url}}" class="rounded-circle" style="width: 90px; height: 90px;">
+                        {% else %}
+                        <img src="{% static 'img/default-profile-image.jpg' %}">
+                        {% endif %}
+
+
+                        <!-- <img class="img-fluid" src="{{suggestion.image.url}}" style="height: 130px; width: 130px;"> -->
+                    </div>
+                    <div class="right-side ml-3" style="width: 80%;">
+                        <a href="/profile/{{suggestion.user}}"
+                            style="color: #ff6600; font-size: 20px; font-weight: 500; text-transform: capitalize; text-decoration: none;"
+                            class="mt-2">{{suggestion.user}}</a>
+                        <p class="description mt-2" style="max-height: 40%; overflow: hidden; font-size: 14px;">{{suggestion.bio}}</p>
+
+
+                        <a href="/profile/{{suggestion.user}}" class="btn btn-primary w-100" style="position: absolute; bottom: 0; left: 0; border-radius: 0;" data-ripple="">View User</a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+</body>
+{% endblock content %}
+

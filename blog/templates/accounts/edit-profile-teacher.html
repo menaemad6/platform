@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}Account Settings
+{% endblock title %}
+
+
+{% block content %}
+
+<body>
+
+
+    {% if user_profile.instructor == True %}
+
+    <!-- edit profile  -->
+
+
+    <div class="container mt-5 mb-5">
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <!-- <img width="100" height="100" src="{{user_profile.image.url}}" /> -->
+                        <label for="exampleFormControlFile1">Profile Image</label>
+                        <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input id="name" class="form-control" name="name" value="{{user_profile.name}}" type="text"
+                            placeholder="Enter Your Name">
+                    </div>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="bio">Phone Number</label>
+                        <input id="bio" class="form-control" name="phone" value="{{user_profile.phone}}" type="text"
+                            placeholder="Enter Your Phone Number">
+                    </div>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="bio">School</label>
+                        <input id="bio" class="form-control" name="school" value="{{user_profile.school}}" type="text"
+                            placeholder="Enter Your School Name">
+                    </div>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="location"> Location</label>
+                        <input id="location" class="form-control" name="location" value="{{user_profile.location}}"
+                            type="text" placeholder="Enter Your Location">
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <div class="col-8">
+                    <button type="submit" class="btn btn-success w-100 mb-2 mt-3">Save</button>
+                    <a class="btn btn-danger w-100" style="text-decoration: none;"
+                        href="/profile/{{user.username}}">Cancel</a>
+                </div>
+
+
+
+            </div>
+        </form>
+
+    </div>
+
+
+    {% else %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Instructor To View This Page</p>
+                        <a href="/settings" class="btn btn-success mt-3 w-100">Profile Settings</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+
+
+
+
+
+
+</body>
+{% endblock content %}

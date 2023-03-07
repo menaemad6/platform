@@ -1,0 +1,332 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <title>Ecourse - Register</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <!-- Website Icon -->
+    <link href="{% static 'img/site-logo.png' %}" rel="icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid d-none d-lg-block">
+        <div class="row align-items-center py-4 px-xl-5">
+            <div class="col-lg-3">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                </a>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Our Center</h6>
+                        <small>128 , City , Sohag</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
+                        <small>course@gmail.com</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-phone text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
+                        <small>012 345 6789</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    {% if user.is_authenticated %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Are Already Signed In</p>
+                        <a href="/" class="btn btn-success w-100" data-ripple="">
+                            <span style="font-size: 10px;"><i
+                                    class="fa fa-2x fa-home mr-3"></i></span>Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+        <!-- Navbar Start -->
+        <div class="container-fluid">
+            <div class="row border-top px-xl-5">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                <div class="col-lg-9">
+                    <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                        <a href="" class="text-decoration-none d-block d-lg-none">
+                            <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+    
+    
+                            <div class="navbar-nav py-0">
+    
+    
+    
+                                <button type="button" class="nav-item nav-link"
+                                style="border: 0; background-color: white; height: fit-content;">
+                                <a href="/signin" class="nav-link" style="text-decoration: none; padding: 0;">Login</a></button>
+
+                                <button type="button" class="nav-item nav-link"
+                                style="border: 0; background-color: white; height: fit-content;">
+                                <a href="/signup" class="nav-link" style="text-decoration: none; padding: 0;">Register</a></button>
+    
+                                <!-- <a class="nav-item nav-link" href="/signin">Login</a>
+                                <a class="nav-item nav-link" href="/signup">Register</a> -->
+    
+    
+    
+    
+    
+                            </div>
+    
+                        </div>
+                    </nav>
+                </div>
+    
+                <div class="col-lg-3 d-none d-lg-block">
+    
+                    <a href="/signin"
+                        class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none"
+                        style="height: 67px; padding: 0 30px; border: 0;">
+                        <h5 class="text-primary m-0"><i class="fa fa-right-to-bracket mr-2"></i>Login</h5>
+                </a>
+    
+    
+    
+                </div>
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+
+    <!-- Signup Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-3 pb-3">
+                <!-- <h6 class="text-primary text-uppercase" style="font-size: 30px;" >تسجيل دخول</h6> -->
+                <h1 style="font-size: 50px;">Create new account</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-white" style="padding: 30px;">
+                        <div id="success"></div>
+
+
+
+
+
+
+
+
+
+                        <form method="post">
+
+                            {% csrf_token %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa fa-2x fa-user text-primary mr-3"
+                                            style="font-size: 20px;"></i></span>
+                                </div>
+                                <input type="text" name="username" class="form-control p-4" placeholder="Username" required
+                                    aria-label="Username" aria-describedby="basic-addon1"
+                                    data-validation-required-message="Enter Your Username">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa fa-2x fa-envelope text-primary mr-3"
+                                            style="font-size: 20px;"></i></span>
+                                </div>
+                                <input type="email" name="email" class="form-control p-4" placeholder="Email Address" required
+                                    aria-label="Username" aria-describedby="basic-addon1"
+                                    data-validation-required-message="Enter Your Email Address">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa fa-2x fa-key text-primary mr-3"
+                                            style="font-size: 20px;"></i></span>
+                                </div>
+                                <input type="password" name="password" class="form-control p-4" placeholder="Password" required
+                                    aria-label="Username" aria-describedby="basic-addon1"
+                                    data-validation-required-message="Enter Your Password">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa fa-2x fa-key text-primary mr-3"
+                                            style="font-size: 20px;"></i></span>
+                                </div>
+                                <input type="password" name="password2" class="form-control p-4" placeholder="Confrim Your Password" required
+                                    aria-label="Username" aria-describedby="basic-addon1"
+                                    data-validation-required-message="Make Sure The 2 Passwords Is The Same">
+                            </div>
+
+
+
+
+
+                            <!-- <div class="control-group">
+                                <input type="text" class="form-control p-4" id="subject" placeholder="Username" required
+                                    id="id_username" name="username"
+                                    data-validation-required-message="Enter Your Username" />
+                                <p class="help-block text-danger"></p>
+                            </div> -->
+
+                            <!-- <div class="control-group">
+                                <input type="email" class="form-control p-4" id="subject" placeholder="Email" required
+                                    id="id_username" name="email"
+                                    data-validation-required-message="Enter Your Username" />
+                                <p class="help-block text-danger"></p>
+                            </div> -->
+
+                            <!-- <div class="control-group">
+                                <input type="password" class="form-control p-4" id="subject" placeholder="Password"
+                                    required id="id_username" name="password"
+                                    data-validation-required-message="Enter Your Username" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+                            <div class="control-group">
+                                <input type="password" class="form-control p-4" id="subject"
+                                    placeholder="Re Enter Your Password" required id="id_password" name="password2"
+                                    data-validation-required-message="Enter Your Password" />
+                                <p class="help-block text-danger"></p>
+                            </div> -->
+
+
+                            <label class="mt-2 mb-2">You are a student or teacher?</label>
+
+                            <div class="form-check">
+                                <input class="form-check-input" value="False" type="radio" name="teacher" id="flexRadioDefault1"
+                                    checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Student
+                                </label>
+                            </div>
+        
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" value="True" type="radio" name="teacher" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Instructor
+                                </label>
+                            </div>
+
+
+
+
+                            <div class="text-center">
+                                <button class="btn btn-primary py-3 px-4 w-100" type="submit"
+                                    id="sendMessageButton">Register</button>
+                            </div>
+                        </form>
+
+                        <p class="text-base">Already have an account? <a href="/signin"> Login </a></p>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Signup End -->
+
+    {% endif %}
+
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+
+
+    <script src="https://kit.fontawesome.com/1454af8120.js" crossorigin="anonymous"></script>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+
+
+
+</html>

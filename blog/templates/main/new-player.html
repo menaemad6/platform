@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}{{post.title}} - {{post.user}}{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/demo.css" />
+
+<link rel="preload" as="font" crossorigin type="font/woff2"
+    href="https://cdn.plyr.io/static/fonts/gordita-medium.woff2" />
+<link rel="preload" as="font" crossorigin type="font/woff2"
+    href="https://cdn.plyr.io/static/fonts/gordita-bold.woff2" />
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-132699580-1');
+</script>
+{% endblock head %}
+
+
+{% block content %}
+
+<body>
+
+
+
+
+
+
+    {% if user_profile.premium == True %}
+
+    {% if text == 'yes' %}
+    <!-- Detail Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-5">
+                        <h1 class="mb-2">{{post.title}}</h1>
+                        <h6 class="text-primary mb-5"><span
+                                style="font-weight: bold; font-size: 20px; text-transform: uppercase;">{{post.subject}}
+                                ,</span> {{post.created_at|date:"M d, Y"}} </h6>
+
+
+
+
+
+
+
+                        <!-- <video controls="True" preload="preload" class="w-100">
+                            <source src="{{post.video.url}}" type="video/mp4">
+                            </source>
+                        </video> -->
+
+
+
+
+
+
+                        <video controls crossorigin playsinline class="w-100" data-poster="{{post.image.url}}"
+                            id="player">
+
+                            <!-- <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+                            type="video/mp4" size="576" /> -->
+                            <source src="{{post.video.url}}" type="video/mp4" size="1080" />
+                            <!-- <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+                            type="video/mp4" size="1080" /> -->
+
+                            <track kind="captions" label="English" srclang="en"
+                                src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default />
+                            <track kind="captions" label="Français" srclang="fr"
+                                src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt" />
+
+                            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+                                download>Download</a>
+                        </video>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="video-caption" style="overflow: hidden;">
+                            <p class="mt-3">{{post.caption}}</p>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <!-- Author Bio -->
+                    <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
+
+                        {% if user_profile.premium == True %}
+                        <img src="{{post.teacher_img.url}}" class="img-fluid rounded-circle mx-auto mb-3"
+                            style="width: 100px;">
+                        {% else %}
+                        <img src="{% static 'img/default-profile-image.jpg' %}"
+                            class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
+                        {% endif %}
+
+                        {% if user_profile.premium == True %}
+                        <h3 class="text-primary mb-1" style="text-transform: uppercase;">{{post.teacher_name}}</h3>
+                        {% else %}
+                        <h3 class="text-primary mb-1" style="text-transform: uppercase;">{{post.user}}</h3>
+                        {% endif %}
+
+
+                        <h3 class="text-secondary mb-1" style="font-size: 18px; text-transform: uppercase;">
+                            {{post.subject}}</h3>
+                        <!-- <p class="text-white m-0">{{video.user.bio}}</p> -->
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <!-- Recent Post -->
+                    <div class="mb-5">
+                        <!-- <h3 class="text-uppercase mb-4" style="letter-spacing: 2px;">Recent Videos</h3> -->
+
+
+
+                        {% for post in other reversed %}
+                        <a class="d-flex align-items-center text-decoration-none mb-3" href="{{post.slug}}">
+
+                            {% if post.image %}
+                            <img class="img-fluid rounded" src="{{post.image.url}}" style="width: 50%;">
+                            {% else %}
+                            <img class="img-fluid" src="{% static 'img/course-2.jpg' %}">
+                            {% endif %}
+
+                            <div class="pl-3">
+                                <h6 class="m-1">{{post.title}}</h6>
+                                <small class="ml-2">{{post.created_at|date:"M d, Y"}}</small>
+                            </div>
+                        </a>
+                        {% endfor %}
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.plyr.io/3.7.3/demo.js" crossorigin="anonymous"></script>
+    <!-- Detail End -->
+    {% endif %}
+
+    {% if text == 'no' %}
+    <!-- <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Purchase This Lesson To View It</p>
+                        <a href="/lessons" class="btn btn-success mt-3 w-100">Lessons</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+
+
+    <!-- Lessons Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <!-- <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Lessons</h5> -->
+                <h1 class="">You Must Purchase This Lesson First To View It!</h1>
+            </div>
+            <div class="row justify-content-center">
+
+
+
+
+                <div class="col-lg-6 col-md-6 mb-4" style="position: relative;">
+                    <div class="rounded overflow-hidden mb-2">
+                        {% if post.image %}
+                        <img class="img-fluid" src="{{post.image.url}}">
+                        {% else %}
+                        <img class="img-fluid" src="{% static 'img/course-3.jpg' %}" alt="">
+                        {% endif %}
+
+                        <div class="bg-secondary p-4">
+                            <div class="d-flex justify-content-between mb-3">
+                                <small class="m-0" style="text-transform: uppercase;"><i
+                                        class="fa fa-user text-primary mr-2"></i>{{post.user}}</small>
+                                <span class="m-0" style="text-decoration: none;">
+                                    <a href="/like-post?post_id={{post.id}}" style="text-decoration: none;">
+                                        <i class="far fa-thumbs-up text-primary mr-2"
+                                            style="font-size: 22px; text-decoration: none;"></i>({{post.no_of_likes}})
+                                    </a>
+                                </span>
+
+
+
+                            </div>
+                            <span class="h5" href="/lessons/{{post.slug}}">{{post.title}}</span>
+
+                            <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0"><i
+                                            class="fa fa-clock text-primary mr-2"></i>{{post.created_at|date:"SHORT_DATE_FORMAT"}}
+                                    </h6>
+                                    <h6 class="m-0"><i class="fa fa-money-bill text-primary mr-2"
+                                            style="font-size: 25px;"></i><span
+                                            style="font-size: 30px; color: black;">{{post.price}}</span>
+                                    </h6>
+                                </div>
+
+                                <form action="/buy-lesson" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{user_profile.user}}" name="buyer" hidden />
+                                    <input type="hidden" value="{{post.id}}" name="post" hidden />
+
+
+
+                                    <!-- <button type="submit" class="w-100 mt-4" style="border-radius: 0; border: 0;">
+                                        <a href="/buy-lesson?post_id={{post.id}}" class="btn btn-primary w-100" 
+                                            style="text-decoration: none; color: white; width: 100%; height: 100%; border-radius: 0; margin: 0;">Purchase</a>
+                                        </button> -->
+
+                                    <button type="submit" class="w-100 mt-4" style="border-radius: 0; border: 0;">
+                                        <a href="/buy-lesson?post_id={{post.id}}" class="btn btn-success w-100"
+                                            style="border-radius: 0;">
+                                            <span style="font-size: 10px;"><i
+                                                    class="fa fa-2x fa-money-bill mr-3"></i></span>Purchase</a>
+                                    </button>
+
+
+
+                                </form>
+
+
+                                <!-- <a href="/lessons" class="btn btn-dark w-100 mt-3" 
+                                        style="text-decoration: none; color: white; width: 100%; height: 100%; border-radius: 0; margin: 0;">Back</a> -->
+
+
+
+                                <a href="/lessons" class="btn btn-dark w-100 mt-3" style="border-radius: 0;">
+                                    <span style="font-size: 10px;"><i
+                                            class="fa fa-solid fa-arrow-left mr-3"></i></span>Back</a>
+
+
+                                <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Lessons End -->
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endif %}
+
+
+    {% if user_profile.premium == False %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Premium User To View Activities</p>
+                        <a href="get-premium" class="btn btn-success mt-3 w-100">Get Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+</body>
+
+{% endblock content %}

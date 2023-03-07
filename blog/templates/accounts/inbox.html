@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Inbox{% endblock title %}
+
+
+{% block content %}
+
+
+<body>
+
+
+
+    {% if user_profile.premium == True %}
+
+
+    <!-- Inbox Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9">
+
+
+                    {% if messages|length == 0 %}
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+                        <p style="font-size: 23px;">There Isnt Any Messages For You</p>
+                    </div>
+                    {% endif %}
+
+                    {% if messages|length >= 1 %}
+
+                    <div class="mb-5 bg-secondary rounded p-4">
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">
+                            <span class="text-primary"><i class="fa-solid fa-bell"></i></span>
+                            Inbox
+                        </h3>
+
+                        {% for comment in messages  %}
+                        <div class="media mb-3 rounded">
+
+                            <!-- {% if comment.username_image %}
+                            <img src="{{comment.username_image.url}}" class="img-fluid rounded-circle mr-3 mt-1"
+                                style="width: 45px;" alt="">
+                            {% else %} -->
+
+                            <!-- {% endif %} -->
+
+
+                            <img src="{% static 'img/default-profile-image.jpg' %}"
+                            class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px;" alt="">
+
+                            <div class="media-body bg-white" style="padding: 10px;">
+                                <h6>{{comment.username_name}}
+                                    <small><i>{{comment.created_at|date:"M d, Y"}}</i></small></h6>
+                                    
+                                <p>{{comment.comment_text}}</p>
+                                <h5 style="padding-left: 20px; color: black;">{{comment.reply}}</h5>
+
+
+
+                            </div>
+
+                            
+
+
+                        </div>
+                        {% endfor %}
+
+
+                
+
+                    </div>
+
+
+                    {% endif %}
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inbox End -->
+
+
+
+
+    {% else %}
+
+
+    <!-- Error Premium Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Premium User To Recharge Codes</p>
+                        <a href="/get-premium" class="btn btn-success mt-3 w-100">Get Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Premium End -->
+
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}

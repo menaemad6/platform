@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Upload New Activity{% endblock title %}
+
+
+{% block content %}
+
+
+<body>
+
+    {% if user.is_authenticated %}
+    {% if user.profile.instructor == True %}
+
+
+
+    
+    
+    
+    
+    
+        <!-- Contact Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">New Video</h5>
+                    <h1>Upload New Video</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="contact-form bg-secondary rounded p-5">
+                            <div id="success"></div>
+
+
+
+
+                            <form method="post" enctype="multipart/form-data">
+    
+                                {% csrf_token %}
+                                
+                                <div class="control-group">
+                                    <input type="text" class="form-control border-0 p-4"  name="title" placeholder="Video Title" required="required" data-validation-required-message="Please enter video title" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="control-group">
+                                    <textarea class="form-control border-0 py-3 px-4" rows="5" name="caption" placeholder="Video Description" required="required" data-validation-required-message="Please enter video description"></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+
+
+
+
+
+
+                                <!-- <div class="control-group">
+                                    <input type="text" class="form-control border-0 p-4"  name="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter video title" />
+                                    <p class="help-block text-danger"></p>
+                                </div> -->
+
+                                <!-- <div class="control-group">
+                                    <input type="text" class="form-control border-0 p-4"  name="year" placeholder="Year" required="required" data-validation-required-message="Please enter video title" />
+                                    <p class="help-block text-danger"></p>
+                                </div> -->
+
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Subject</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="subject">
+                                      <option value="arabic">Arabic</option>
+                                      <option value="english">English</option>
+                                      <option value="math">Math</option>
+                                      <option value="chemistry">Chemistry</option>
+                                      <option value="physics">Physics</option>
+                                      <option value="biology">Biology</option>
+                                      <option value="french">French</option>
+                                      <option value="german">German</option>
+                                    </select>
+                                  </div>
+
+                                  
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Year</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="year">
+                                      <option value="first">First Secondary</option>
+                                      <option value="second">Second Secondary</option>
+                                      <option value="third">Third Secondary</option>
+                                    </select>
+                                  </div>
+
+
+
+                                  <div class="form-group">
+                                    <label for="exampleFormControlFile1">Upload Video</label>
+                                    <input type="file" class="form-control-file"  id="exampleFormControlFile1" name="video">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="exampleFormControlFile1">Upload Video Image (Thumbnail)</label>
+                                    <input type="file" class="form-control-file"  id="exampleFormControlFile1" name="thumbnail">
+                                  </div>
+
+
+
+    
+    
+    
+    
+                                <div class="text-center">
+                                    <button class="btn btn-primary py-3 px-5 w-100 mt-5" type="submit" id="sendMessageButton">Upload</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+    {% else %}
+
+    <a href=""></a>
+
+
+
+    {% endif %}
+    {% if user.profile.instructor == False %}
+
+    
+    
+    
+    
+    
+        <!-- Error Instructor Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+               
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="contact-form bg-secondary rounded p-5 text-center">
+                            <div id="success"></div>
+
+                            <p style="font-size: 23px;">You Must Be Instructor To Upload Videos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Error Instructor End -->
+
+    {% else %}
+
+    <a href=""></a>
+
+    {% endif %}
+
+
+    {% else %} 
+
+
+
+        <!-- Error Instructor Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+               
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="contact-form bg-secondary rounded p-5 text-center">
+                            <div id="success"></div>
+
+                            <p style="font-size: 23px;">You Must Be Instructor To Upload Videos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Error Instructor End -->
+
+
+    {% endif %}
+
+
+
+
+
+
+
+
+    
+</body>
+
+{% endblock content %}

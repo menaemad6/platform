@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}Setup Account
+{% endblock title %}
+
+
+{% block content %}
+
+<body>
+
+
+
+
+    <!-- edit profile  -->
+
+
+    <div class="container mt-5 mb-5">
+
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+
+                <div class="col-8">
+                    <div class="header">
+                        <h1 style="color: black; font-size: 30px;">Welcome Mr {{user_profile.user}},<span style="font-size: 30px;"> Please Setup Your Account</span></h1>
+
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <!-- <img width="100" height="100" src="{{user_profile.image.url}}" /> -->
+                        <label for="exampleFormControlFile1">Profile Image</label>
+                        <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input id="name" class="form-control" name="name"  type="text"
+                            placeholder="Enter Your Name">
+                    </div>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="bio">Phone Number</label>
+                        <input id="bio" class="form-control" name="phone"type="text"
+                            placeholder="Enter Your Phone Number">
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <label for="subject">Subject</label>
+                    <select class="form-control" id="subject" name="subject">
+                        <option>Subject</option>
+                        <option value="arabic">Arabic</option>
+                        <option value="english">English</option>
+                        <option value="math">Math</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="biology">Biology</option>
+                        <option value="french">French</option>
+                        <option value="german">German</option>
+                    </select>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="bio">School</label>
+                        <input id="bio" class="form-control" name="school"type="text"
+                            placeholder="Enter Your School Name">
+                    </div>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="location"> Location</label>
+                        <input id="location" class="form-control" name="location" 
+                            type="text" placeholder="Enter Your Location">
+                    </div>
+                </div>
+
+
+
+                <!-- <div class="col-8">
+
+                    <label class="mt-5">Do You Want To Make Your Account Public Or Private?</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" value="True" type="radio" name="public" id="flexRadioDefault1"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Public
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" value="False" type="radio" name="public" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Private
+                        </label>
+                    </div>
+
+               
+
+
+
+
+                </div> -->
+
+
+                <div class="col-8">
+                    <button type="submit" class="btn btn-success w-100 mb-2 mt-3">Save</button>
+                    <a class="btn btn-danger w-100" style="text-decoration: none;"
+                        href="/profile/{{user.username}}">Cancel</a>
+                </div>
+
+
+
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+{% endblock content %}

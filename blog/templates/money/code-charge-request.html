@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Wallet Recharge{% endblock title %}
+
+
+
+
+{% block content %}
+
+
+<body>
+
+
+
+    {% if user_profile.premium == True %}
+
+
+    {% if text == 'yes' %}
+    <!-- Error Instructor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Have Charged Your Wallet Succusfully</p>
+                        <a href="/lessons" class="btn btn-success w-100 mt-3" style="border-radius: 0;">
+                            <span style="font-size: 10px;"><i class="fa fa-solid fa-book mr-3"></i></span>Lessons</a>
+                        <a href="/wallet/code-charge" class="btn btn-dark w-100 mt-3" style="border-radius: 0;">
+                            <span style="font-size: 10px;"><i class="fa fa-solid fa-arrow-left mr-3"></i></span>Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Instructor End -->
+    {% endif %}
+
+
+    {% if text == 'no' %}
+    <!-- Error Instructor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">The Code Is Invalid</p>
+                        <a href="/wallet/code-charge" class="btn btn-dark w-100 mt-3" style="border-radius: 0;">
+                            <span style="font-size: 10px;"><i class="fa fa-solid fa-arrow-left mr-3"></i></span>Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Instructor End -->
+    {% endif %}
+
+
+
+
+    {% else %}
+
+
+    <!-- Error Instructor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Premium User To Recharge Codes</p>
+                        <a href="/get-premium" class="btn btn-success mt-3 w-100">Get Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Instructor End -->
+
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title%}Inbox{% endblock title %}
+
+
+{% block content %}
+
+
+<body>
+
+
+
+    {% if user_profile.premium == True %}
+
+
+
+
+    {% if activities|length == 0 %}
+
+    <!-- Activities Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9">
+
+
+
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+                        <p style="font-size: 23px;">There Isnt Any Activities Yet</p>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Activities End -->
+
+    {% endif %}
+
+    {% if activities|length >= 1 %}
+    <!-- Activities Start -->
+    <div class="container-fluid py-5">
+        <div class="container ">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+
+
+
+
+
+
+                    <div class="mb-5 rounded" style="overflow-x: scroll;">
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">
+                            <span class="text-primary"><i class="fa-solid fa-money-bill "></i></span>
+                            Account Payments
+                        </h3>
+
+
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="color: #ff6600;">Date</th>
+                                    <th scope="col" style="color: #ff6600;">Activity</th>
+                                    <th scope="col" style="color: #ff6600;">Value</th>
+                                    <th scope="col" style="color: #ff6600;">Wallet</th>
+                                    <th scope="col" style="color: #ff6600;">Method</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for activity in activities  %}
+
+                                {% if activity.activity_type == 'purchase' %}
+
+                                <tr>
+                                    <th>{{activity.created_at}}</th>
+
+                                    {% if activity.activity_type == 'purchase' %}
+                                    <td>Purchased : {{activity.lesson_name}}</td>
+                                    {% endif %}
+
+                                    {% if activity.activity_type == 'charge' %}
+                                    <td>Wallet Recharge : {{activity.money}}</td>
+                                    {% endif %}
+
+                                    <td>{{activity.money}}</td>
+                                    <td>{{activity.wallet}}</td>
+                                    <td style="text-transform: capitalize;">By {{activity.purchase_type}}</td>
+                                </tr>
+
+                                {% endif %}
+                                {% endfor %}
+
+
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Activities End -->
+    {% endif %}
+
+
+
+
+    {% else %}
+
+
+    <!-- Error Premium Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-secondary rounded p-5 text-center">
+                        <div id="success"></div>
+
+                        <p style="font-size: 23px;">You Must Be Premium User To Recharge Codes</p>
+                        <a href="/get-premium" class="btn btn-success mt-3 w-100">Get Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Error Premium End -->
+
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{% endblock content %}
